@@ -563,6 +563,21 @@ body {
   font-size: 14px;
   color: var(--bordeaux);
   letter-spacing: 0.04em;
+  padding: 14px 18px;
+}
+.logo-img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.7;
+  transition: filter 0.3s ease, opacity 0.3s ease;
+}
+.logo-chip:hover .logo-img {
+  filter: grayscale(0);
+  opacity: 1;
 }
 
 /* ════════════════════════ FOOTER ════════════════════════ */
