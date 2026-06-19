@@ -553,8 +553,8 @@ body {
 .logo-chip {
   flex-shrink: 0;
   width: 152px; height: 68px;
-  background: #f8f6f5;
-  border: 1px solid #ece6e3;
+  background: transparent;
+  border: none;
   display: flex;
   align-items: center;
   justify-content: center;
