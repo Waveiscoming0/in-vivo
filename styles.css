@@ -366,8 +366,11 @@ body {
   text-wrap: pretty;
 }
 
-/* ─── Pour qui : grille de cartes ─── */
-.audience-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+/* ─── Pour qui : cartes en triangle (1 en haut, 2 en bas) ─── */
+.audience-grid { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.audience-top { width: calc(50% - 10px); }
+.audience-bottom { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; }
+.audience-grid .card { height: 100%; }
 .card {
   overflow: hidden;
   padding: 36px 32px;
@@ -828,7 +831,7 @@ body {
 /* ════════════════════════ RESPONSIVE ════════════════════════ */
 @media (max-width: 960px) {
   .hero-grid { grid-template-columns: 1fr; gap: 48px; }
-  .audience-grid { grid-template-columns: 1fr 1fr; }
+  .audience-top { width: calc(50% - 10px); }
   .formation-grid { grid-template-columns: 1fr 1fr; }
   .history-grid { grid-template-columns: 1fr; gap: 40px; }
   .install-grid { grid-template-columns: 1fr; }
@@ -838,7 +841,8 @@ body {
   .mobile-btn { display: flex; }
 }
 @media (max-width: 640px) {
-  .audience-grid { grid-template-columns: 1fr; }
+  .audience-top { width: 100%; }
+  .audience-bottom { grid-template-columns: 1fr; }
   .formation-grid { grid-template-columns: 1fr; }
   .hero-h1 { font-size: 40px; }
   .section-h2 { font-size: 32px; }

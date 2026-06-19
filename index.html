@@ -16,7 +16,7 @@
   <!-- Chatbot n8n -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" />
 
-  <link rel="stylesheet" href="./styles.css?v=15" />
+  <link rel="stylesheet" href="./styles.css?v=16" />
 </head>
 <body>
 
@@ -95,59 +95,52 @@
       <div class="section-head">
         <span class="eyebrow">Nos publics</span>
         <h2 class="section-h2">À qui s'adressent nos formations ?</h2>
-        <p class="section-sub">Quatre publics, un même engagement : rendre les sciences du vivant accessibles et concrètes.</p>
+        <p class="section-sub">Trois publics, un même engagement : rendre les sciences du vivant accessibles et concrètes.</p>
       </div>
 
       <div class="audience-grid">
-        <article class="card card--sauge">
-          <div class="card-icon card-icon--sauge">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <line x1="10" y1="16" x2="10" y2="5" stroke="#CF9979" stroke-width="1.4" stroke-linecap="round"></line>
-              <polyline points="6,9 10,5 14,9" stroke="#CF9979" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none"></polyline>
-            </svg>
-          </div>
-          <h3 class="card-title">Demandeurs d'emploi</h3>
-          <p class="card-text">Formations qualifiantes, souvent gratuites, vers les métiers des biotechnologies et de la biopharmacie.</p>
-          <a href="#" class="card-link">Voir les formations <span aria-hidden="true">→</span></a>
-        </article>
+        <!-- Sommet du triangle : Entreprises -->
+        <div class="audience-top">
+          <article class="card card--sauge">
+            <div class="card-icon card-icon--sauge">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <rect x="3" y="8" width="14" height="10" rx="1.5" stroke="#CF9979" stroke-width="1.4" fill="none"></rect>
+                <path d="M7 8 L7 5.5 C7 4.7 7.7 4 8.5 4 L11.5 4 C12.3 4 13 4.7 13 5.5 L13 8" stroke="#CF9979" stroke-width="1.4" fill="none"></path>
+                <line x1="3" y1="12" x2="17" y2="12" stroke="#CF9979" stroke-width="1"></line>
+              </svg>
+            </div>
+            <h3 class="card-title">Entreprises</h3>
+            <p class="card-text">Formations théoriques et techniques en GMP, affaires réglementaires et procédés biotech.</p>
+            <a href="#" class="card-link">Consulter le catalogue <span aria-hidden="true">→</span></a>
+          </article>
+        </div>
 
-        <article class="card card--bordeaux">
-          <div class="card-icon card-icon--bordeaux">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path d="M2 7 L10 3 L18 7 L10 11 Z" stroke="#814448" stroke-width="1.4" fill="none"></path>
-              <path d="M4.5 8.5 L4.5 13.5 L10 16 L15.5 13.5 L15.5 8.5" stroke="#814448" stroke-width="1.4" fill="none"></path>
-            </svg>
-          </div>
-          <h3 class="card-title">Écoles</h3>
-          <p class="card-text">Animations et ateliers scientifiques pour éveiller la curiosité, du microscope à l'ADN.</p>
-          <a href="#" class="card-link">Découvrir les animations <span aria-hidden="true">→</span></a>
-        </article>
+        <!-- Base du triangle : deux cartes côte à côte -->
+        <div class="audience-bottom">
+          <article class="card card--bordeaux">
+            <div class="card-icon card-icon--bordeaux">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <line x1="10" y1="16" x2="10" y2="5" stroke="#814448" stroke-width="1.4" stroke-linecap="round"></line>
+                <polyline points="6,9 10,5 14,9" stroke="#814448" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none"></polyline>
+              </svg>
+            </div>
+            <h3 class="card-title">Demandeurs d'emploi</h3>
+            <p class="card-text">Formations qualifiantes, souvent gratuites, vers les métiers des biotechnologies et de la biopharmacie.</p>
+            <a href="#" class="card-link">Voir les formations <span aria-hidden="true">→</span></a>
+          </article>
 
-        <article class="card card--bordeaux">
-          <div class="card-icon card-icon--bordeaux">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <rect x="3" y="8" width="14" height="10" rx="1.5" stroke="#814448" stroke-width="1.4" fill="none"></rect>
-              <path d="M7 8 L7 5.5 C7 4.7 7.7 4 8.5 4 L11.5 4 C12.3 4 13 4.7 13 5.5 L13 8" stroke="#814448" stroke-width="1.4" fill="none"></path>
-              <line x1="3" y1="12" x2="17" y2="12" stroke="#814448" stroke-width="1"></line>
-            </svg>
-          </div>
-          <h3 class="card-title">Entreprises</h3>
-          <p class="card-text">Formations théoriques et techniques en GMP, affaires réglementaires et procédés biotech.</p>
-          <a href="#" class="card-link">Consulter le catalogue <span aria-hidden="true">→</span></a>
-        </article>
-
-        <article class="card card--sauge">
-          <div class="card-icon card-icon--sauge">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path d="M10 5 L10 17" stroke="#CF9979" stroke-width="1.4" stroke-linecap="round"></path>
-              <path d="M10 5 C10 5 7.5 3.5 3 4.5 L3 16 C7.5 15 10 17 10 17" stroke="#CF9979" stroke-width="1.4" fill="none"></path>
-              <path d="M10 5 C10 5 12.5 3.5 17 4.5 L17 16 C12.5 15 10 17 10 17" stroke="#CF9979" stroke-width="1.4" fill="none"></path>
-            </svg>
-          </div>
-          <h3 class="card-title">Enseignement supérieur</h3>
-          <p class="card-text">Travaux pratiques en laboratoire pour les étudiants de Hautes Écoles et de promotion sociale.</p>
-          <a href="#" class="card-link">Explorer les programmes <span aria-hidden="true">→</span></a>
-        </article>
+          <article class="card card--bordeaux">
+            <div class="card-icon card-icon--bordeaux">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M2 7 L10 3 L18 7 L10 11 Z" stroke="#814448" stroke-width="1.4" fill="none"></path>
+                <path d="M4.5 8.5 L4.5 13.5 L10 16 L15.5 13.5 L15.5 8.5" stroke="#814448" stroke-width="1.4" fill="none"></path>
+              </svg>
+            </div>
+            <h3 class="card-title">Écoles &amp; enseignement supérieur</h3>
+            <p class="card-text">Animations scientifiques pour éveiller la curiosité des écoles, et travaux pratiques en laboratoire pour les étudiants de Hautes Écoles et de promotion sociale.</p>
+            <a href="#" class="card-link">Découvrir nos programmes <span aria-hidden="true">→</span></a>
+          </article>
+        </div>
       </div>
     </div>
   </section>
