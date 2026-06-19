@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Formations · Demandeurs d'emploi — Culture In Vivo</title>
+  <meta name="description" content="Formations qualifiantes, souvent gratuites, pour les demandeurs d'emploi : biotechnologies, culture cellulaire, virologie et affaires réglementaires, chez Culture In Vivo à Nivelles." />
+
+  <link rel="icon" type="image/png" href="./logo.png" />
+
+  <!-- Polices -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="./styles.css?v=6" />
+  <link rel="stylesheet" href="./demandeurs-emploi.css?v=1" />
+</head>
+<body class="page-demandeurs">
+
+  <!-- ════════════════════════ HEADER ════════════════════════ -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner">
+      <a href="index.html#accueil" class="brand" aria-label="Culture In Vivo — accueil">
+        <img src="./logo.png" alt="Culture In Vivo" class="brand-logo" />
+      </a>
+
+      <nav class="nav-links" aria-label="Navigation principale">
+        <div class="nav-dropdown">
+          <span class="nav-dropdown-label" tabindex="0" aria-haspopup="true" aria-expanded="false">Formations</span>
+          <div class="nav-dropdown-menu">
+            <a href="demandeurs-emploi.html">Demandeurs d'emploi</a>
+            <a href="entreprises.html">Entreprises</a>
+          </div>
+        </div>
+        <a href="enseignement.html">Enseignement</a>
+        <a href="actualites.html">Actualités</a>
+        <a href="agenda.html">Agenda</a>
+      </nav>
+
+      <a href="contact.html" class="nav-cta">Nous contacter</a>
+
+      <button class="mobile-btn" id="mobileBtn" aria-label="Ouvrir le menu" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <line x1="3" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+          <line x1="3" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+          <line x1="3" y1="18" x2="21" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Menu mobile -->
+  <div class="mobile-overlay" id="mobileOverlay" hidden>
+    <button class="mobile-close" id="mobileClose" aria-label="Fermer le menu">✕</button>
+    <span class="mobile-group-label">Formations</span>
+    <a href="demandeurs-emploi.html" class="mobile-sublink">Demandeurs d'emploi</a>
+    <a href="entreprises.html" class="mobile-sublink">Entreprises</a>
+    <a href="enseignement.html">Enseignement</a>
+    <a href="actualites.html">Actualités</a>
+    <a href="agenda.html">Agenda</a>
+  </div>
+
+  <!-- ════════════════════════ FORMATIONS ════════════════════════ -->
+  <section class="section section--white de-first">
+    <div class="container">
+
+      <!-- ─── Barre de filtres ─── -->
+      <div class="de-filter">
+        <div class="de-filter-row">
+          <div class="de-field">
+            <label class="de-label" for="deSearch">Rechercher</label>
+            <div class="de-search">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><line x1="16.5" y1="16.5" x2="21" y2="21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+              <input type="text" id="deSearch" placeholder="Mot-clé, métier, technique…" autocomplete="off" />
+            </div>
+          </div>
+
+          <div class="de-field">
+            <label class="de-label" for="deDiscipline">Discipline</label>
+            <div class="de-select">
+              <select id="deDiscipline">
+                <option value="all">Toutes</option>
+                <option value="reglementaire">Affaires réglementaires</option>
+                <option value="culture-cellulaire">Culture cellulaire</option>
+                <option value="virologie">Virologie</option>
+                <option value="biologie-moleculaire">Biologie moléculaire</option>
+                <option value="immunologie">Immunologie</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="de-filter-foot">
+          <span class="de-results" id="deResults">6 formations</span>
+          <button type="button" class="de-reset" id="deReset">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            Tout réinitialiser
+          </button>
+        </div>
+      </div>
+
+      <div class="de-grid" id="deGrid">
+
+        <a href="#" class="de-card" data-discipline="reglementaire">
+          <div class="de-card-media">
+            <img src="images/Photo%206%20affaires%20reglementaires.png" alt="Affaires réglementaires" loading="lazy" />
+          </div>
+          <div class="de-card-body">
+            <h3 class="de-card-title">Affaires réglementaires : la réglementation du médicament et des produits de santé</h3>
+            <p class="de-card-text">Il s'agit d'un certificat universitaire en affaires réglementaires portant sur la réglementation du médicament et des produits de santé. Cette formation est gratuite et qualifiante.</p>
+            <span class="de-date"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><line x1="4" y1="9" x2="20" y2="9" stroke="currentColor" stroke-width="1.6"/><line x1="8" y1="3" x2="8" y2="6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><line x1="16" y1="3" x2="16" y2="6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Prochaine session · <strong>15 sept. 2026</strong></span>
+            <div class="de-tags">
+              <span class="de-tag">Réglementaire</span>
+              <span class="de-tag">Certificat universitaire</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="#" class="de-card" data-discipline="culture-cellulaire">
+          <div class="de-card-media">
+            <img src="images/Photo%206%20GO%204%20Biotech.png" alt="Go 4 biotech — culture cellulaire avancée" loading="lazy" />
+          </div>
+          <div class="de-card-body">
+            <h3 class="de-card-title">Go 4 biotech : formation en culture cellulaire avancée</h3>
+            <p class="de-card-text">Cette formation fait partie du projet Go 4 biotech qui propose un programme complet de formations en culture cellulaire au profit de la santé.</p>
+            <span class="de-date"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><line x1="4" y1="9" x2="20" y2="9" stroke="currentColor" stroke-width="1.6"/><line x1="8" y1="3" x2="8" y2="6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><line x1="16" y1="3" x2="16" y2="6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Prochaine session · <strong>6 oct. 2026</strong></span>
+            <div class="de-tags">
+              <span class="de-tag">Culture cellulaire</span>
+              <span class="de-tag">Biotech</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="#" class="de-card" data-discipline="virologie">
+          <div class="de-card-media">
+            <img src="images/Photo%206%20technicien%20Virologie.png" alt="Technicien spécialisé en virologie appliquée" loading="lazy" />
+          </div>
+          <div class="de-card-body">
+            <h3 class="de-card-title">Technicien spécialisé en virologie appliquée — Focus production de vaccins</h3>
+            <p class="de-card-text">Cette formation a pour thématique les techniques de laboratoire en virologie : détecter, amplifier et quantifier les virus et les bactériophages. Elle consiste également à comprendre le rôle des virus dans la production de vaccins.</p>
+            <span class="de-date"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><line x1="4" y1="9" x2="20" y2="9" stroke="currentColor" stroke-width="1.6"/><line x1="8" y1="3" x2="8" y2="6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><line x1="16" y1="3" x2="16" y2="6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Prochaine session · <strong>3 nov. 2026</strong></span>
+            <div class="de-tags">
+              <span class="de-tag">Virologie</span>
+              <span class="de-tag">Vaccins</span>
+              <span class="de-tag">Technicien</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="#" class="de-card" data-discipline="biologie-moleculaire">
+          <div class="de-card-media">
+            <img src="images/Photo%207%20Formation%20sp%C3%A9cifique%20en%20biotechnologie.png" alt="Formation spécifique en biotechnologie" loading="lazy" />
+          </div>
+          <div class="de-card-body">
+            <h3 class="de-card-title">Formation spécifique en biotechnologie orientation « Culture cellulaire et PCR »</h3>
+            <p class="de-card-text">Cette formation permet d'acquérir des techniques en microbiologie, en biologie moléculaire, en purification de protéines, en immunologie, en virologie ainsi qu'en culture cellulaire.</p>
+            <span class="de-date"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><line x1="4" y1="9" x2="20" y2="9" stroke="currentColor" stroke-width="1.6"/><line x1="8" y1="3" x2="8" y2="6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><line x1="16" y1="3" x2="16" y2="6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Prochaine session · <strong>12 janv. 2027</strong></span>
+            <div class="de-tags">
+              <span class="de-tag">Biologie moléculaire</span>
+              <span class="de-tag">PCR</span>
+              <span class="de-tag">Microbiologie</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="#" class="de-card" data-discipline="biologie-moleculaire">
+          <div class="de-card-media">
+            <img src="images/photo%207%20Formation%20ACTIO.png" alt="ACTIO — technicien de laboratoire en biotechnologie" loading="lazy" />
+          </div>
+          <div class="de-card-body">
+            <h3 class="de-card-title">ACTIO — Tremplin vers le métier de technicien de laboratoire en biotechnologie</h3>
+            <p class="de-card-text">La formation Actio permet d'acquérir des connaissances sur les techniques de microbiologie, de biologie moléculaire, de purification de protéines, d'immunologie, de virologie et de culture cellulaire.</p>
+            <span class="de-date"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><line x1="4" y1="9" x2="20" y2="9" stroke="currentColor" stroke-width="1.6"/><line x1="8" y1="3" x2="8" y2="6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><line x1="16" y1="3" x2="16" y2="6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Prochaine session · <strong>22 sept. 2026</strong></span>
+            <div class="de-tags">
+              <span class="de-tag">Technicien</span>
+              <span class="de-tag">Microbiologie</span>
+              <span class="de-tag">Immunologie</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="#" class="de-card" data-discipline="immunologie">
+          <div class="de-card-media">
+            <img src="images/Photo%207%20formation%20immuno-essais.png" alt="Immuno-essais — techniques d'analyse en immunologie" loading="lazy" />
+          </div>
+          <div class="de-card-body">
+            <h3 class="de-card-title">Immuno-essais : techniques d'analyse en immunologie</h3>
+            <p class="de-card-text">Cette formation initie aux principales techniques d'analyse immunologique — ELISA, cytométrie en flux et dosage d'anticorps — utilisées en diagnostic et en contrôle qualité biopharmaceutique.</p>
+            <span class="de-date"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><line x1="4" y1="9" x2="20" y2="9" stroke="currentColor" stroke-width="1.6"/><line x1="8" y1="3" x2="8" y2="6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><line x1="16" y1="3" x2="16" y2="6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Prochaine session · <strong>17 nov. 2026</strong></span>
+            <div class="de-tags">
+              <span class="de-tag">Immunologie</span>
+              <span class="de-tag">ELISA</span>
+              <span class="de-tag">Diagnostic</span>
+            </div>
+          </div>
+        </a>
+
+      </div>
+
+      <p class="de-empty" id="deEmpty">Aucune formation ne correspond à votre recherche.</p>
+    </div>
+  </section>
+
+  <!-- ════════════════════════ FOOTER ════════════════════════ -->
+  <footer id="contact" class="footer">
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h3 class="footer-h3">Restez informé</h3>
+        <p class="footer-text">Recevez nos actualités et dates de sessions directement dans votre boîte mail.</p>
+        <form class="newsletter" id="newsletterForm">
+          <input type="email" id="newsletterEmail" class="newsletter-input" placeholder="votre@email.com" required />
+          <button type="submit" class="newsletter-btn">S'inscrire</button>
+        </form>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-h3">Contact</h3>
+        <div class="footer-contact">
+          <p class="footer-text">Rue du Progrès 4 bte 7<br />1400 Nivelles, Belgique</p>
+          <a href="tel:067878656" class="footer-link">Tél : 067 87 86 56</a>
+          <a href="mailto:info@cultureinvivo.be" class="footer-link">info@cultureinvivo.be</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-h3">Suivez-nous</h3>
+        <p class="footer-text">Retrouvez nos actualités sur les réseaux sociaux.</p>
+        <div class="socials">
+          <a href="#" aria-label="Facebook" class="social"><span style="font-weight:600;font-size:16px;">f</span></a>
+          <a href="#" aria-label="LinkedIn" class="social"><span style="font-weight:600;font-size:14px;">in</span></a>
+          <a href="#" aria-label="Instagram" class="social">
+            <svg width="17" height="17" viewBox="0 0 17 17" fill="none">
+              <rect x="1.5" y="1.5" width="14" height="14" rx="4" stroke="white" stroke-width="1.3" fill="none"></rect>
+              <circle cx="8.5" cy="8.5" r="3.5" stroke="white" stroke-width="1.3" fill="none"></circle>
+              <circle cx="13" cy="4" r="1" fill="white"></circle>
+            </svg>
+          </a>
+          <a href="#" aria-label="X" class="social"><span style="font-weight:700;font-size:14px;">X</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Culture In Vivo ASBL. Tous droits réservés.</span>
+      <div class="footer-legal">
+        <a href="#">Mentions légales</a>
+        <a href="#">Politique de confidentialité</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ════════════════════════ CHATBOT ════════════════════════ -->
+  <div class="chat-widget">
+    <div class="chat-panel" id="chatPanel" hidden>
+      <div class="chat-header">
+        <span class="chat-title">Besoin d'aide ?</span>
+        <button class="chat-close" id="chatClose" aria-label="Fermer le chat">✕</button>
+      </div>
+      <div class="chat-body">
+        <p>Bonjour ! Comment pouvons-nous vous aider ? Posez votre question ou décrivez votre besoin.</p>
+      </div>
+      <form class="chat-input-row" id="chatForm">
+        <input type="text" class="chat-input" placeholder="Votre message..." />
+        <button type="submit" class="chat-send">Envoyer</button>
+      </form>
+    </div>
+
+    <button class="chat-fab" id="chatFab" aria-label="Ouvrir le chat">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M4 17 L4 6 C4 4.9 4.9 4 6 4 L18 4 C19.1 4 20 4.9 20 6 L20 14 C20 15.1 19.1 16 18 16 L8 16 L4 20 Z" stroke="white" stroke-width="1.5" fill="none" stroke-linejoin="round"></path>
+        <line x1="8" y1="9" x2="16" y2="9" stroke="white" stroke-width="1.4" stroke-linecap="round"></line>
+        <line x1="8" y1="12" x2="13" y2="12" stroke="white" stroke-width="1.4" stroke-linecap="round"></line>
+      </svg>
+    </button>
+  </div>
+
+  <script src="./script.js"></script>
+
+  <!-- Filtres de la page Demandeurs d'emploi -->
+  <script>
+    (function () {
+      const grid = document.getElementById('deGrid');
+      const search = document.getElementById('deSearch');
+      const discipline = document.getElementById('deDiscipline');
+      const results = document.getElementById('deResults');
+      const empty = document.getElementById('deEmpty');
+      const reset = document.getElementById('deReset');
+      if (!grid) return;
+
+      const cards = Array.from(grid.querySelectorAll('.de-card'));
+      // Texte recherchable pré-calculé pour chaque carte
+      cards.forEach((c) => { c._text = c.textContent.toLowerCase(); });
+
+      const apply = () => {
+        const q = search.value.trim().toLowerCase();
+        const disc = discipline.value;
+        let visible = 0;
+
+        cards.forEach((card) => {
+          const okText = !q || card._text.includes(q);
+          const okDisc = disc === 'all' || card.dataset.discipline === disc;
+          const show = okText && okDisc;
+          card.classList.toggle('is-hidden', !show);
+          if (show) visible++;
+        });
+
+        results.textContent = visible + (visible > 1 ? ' formations' : ' formation');
+        empty.classList.toggle('is-shown', visible === 0);
+      };
+
+      search.addEventListener('input', apply);
+      discipline.addEventListener('change', apply);
+      reset.addEventListener('click', () => {
+        search.value = '';
+        discipline.value = 'all';
+        apply();
+      });
+
+      apply();
+    })();
+  </script>
+</body>
+</html>

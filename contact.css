@@ -1,0 +1,156 @@
+/* ════════════════════════════════════════════════════════════
+   CONTACT — Coordonnées + formulaire
+   Charte Culture In Vivo : bordeaux / terracotta / sauge.
+   ════════════════════════════════════════════════════════════ */
+
+/* Apparition au scroll */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.is-visible { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+.contact-section {
+  position: relative;
+  padding: 190px 32px 110px;
+  background: linear-gradient(180deg, #ffffff 0%, #ffffff 14%, #faefe7 42%, var(--cream-bg) 100%);
+  overflow: hidden;
+}
+.contact-section::before {
+  content: "";
+  position: absolute;
+  top: 40px;
+  right: -120px;
+  width: 540px;
+  height: 480px;
+  background: radial-gradient(closest-side, rgba(207, 153, 121, 0.32), transparent 70%);
+  pointer-events: none;
+}
+
+.contact-grid {
+  position: relative;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: 64px;
+  align-items: start;
+}
+
+/* ─────────────── Colonne gauche : infos ─────────────── */
+.contact-eyebrow {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sauge-deep);
+}
+.contact-title {
+  font-family: var(--serif);
+  font-size: 52px;
+  line-height: 1.05;
+  color: var(--bordeaux);
+  margin: 16px 0 0;
+}
+.contact-lead {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--text);
+  margin: 18px 0 0;
+  max-width: 420px;
+}
+
+.contact-info-grid {
+  margin-top: 44px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 34px 28px;
+}
+.contact-info-block { display: flex; gap: 14px; }
+.contact-info-icon {
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  border-radius: 11px;
+  background: #fff;
+  border: 1px solid var(--placeholder-border);
+  display: grid;
+  place-items: center;
+  color: var(--bordeaux);
+}
+.contact-info-label {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin-bottom: 7px;
+}
+.contact-info-value { font-family: var(--sans); font-weight: 300; font-size: 15px; line-height: 1.55; color: var(--text); }
+.contact-info-value a { color: var(--bordeaux); text-decoration: none; transition: color 0.2s ease; }
+.contact-info-value a:hover { color: var(--bordeaux-dark); text-decoration: underline; }
+
+/* ─────────────── Colonne droite : formulaire ─────────────── */
+.contact-card {
+  background: #fff;
+  border: 1px solid var(--placeholder-border);
+  border-radius: 22px;
+  padding: 40px;
+  box-shadow: 0 24px 60px rgba(129, 68, 72, 0.08);
+}
+.contact-card-title {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--ink);
+  margin: 0 0 26px;
+}
+
+.contact-form { display: flex; flex-direction: column; gap: 18px; }
+.field { display: flex; flex-direction: column; gap: 7px; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.field label {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text);
+}
+.field input,
+.field textarea {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 15px;
+  color: var(--ink);
+  background: var(--cream-bg);
+  border: 1px solid var(--placeholder-border);
+  border-radius: 11px;
+  padding: 13px 15px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+.field textarea { resize: vertical; min-height: 130px; }
+.field input::placeholder,
+.field textarea::placeholder { color: #b3a9a6; }
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  background: #fff;
+  border-color: var(--terracotta);
+  box-shadow: 0 0 0 3px rgba(207, 153, 121, 0.22);
+}
+
+.contact-submit { align-self: flex-start; margin-top: 6px; border: none; cursor: pointer; }
+
+/* ─────────────── Responsive ─────────────── */
+@media (max-width: 880px) {
+  .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+  .contact-title { font-size: 42px; }
+}
+@media (max-width: 520px) {
+  .contact-info-grid { grid-template-columns: 1fr; }
+  .field-row { grid-template-columns: 1fr; }
+  .contact-card { padding: 28px 22px; }
+}

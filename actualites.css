@@ -1,0 +1,455 @@
+/* ════════════════════════════════════════════════════════════
+   Page ACTUALITÉS — « Le fil du vivant »
+   Fond en couches (crème + halos bordeaux/sauge/terracotta +
+   grille scientifique discrète). Cartes réseaux + veille édito.
+   Réutilise les jetons de styles.css (couleurs, polices).
+   ════════════════════════════════════════════════════════════ */
+
+.page-actualites {
+  --paper: #ffffff;
+  --paper-raise: #ffffff;
+  --line: #ece2dc;
+  --line-soft: #f1e9e4;
+  position: relative;
+  background: var(--paper);
+}
+
+/* ─── Fond élaboré : halos de couleur + grille « microscope » ─── */
+.page-actualites::before {
+  /* Halos de couleur diffus, dans les trois teintes de la charte */
+  /* Désactivé pour le moment : fond laissé en blanc */
+  display: none;
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(60% 45% at 82% -8%,  rgba(176, 204, 194, 0.30), transparent 60%),
+    radial-gradient(48% 40% at 6% 14%,   rgba(207, 153, 121, 0.18), transparent 62%),
+    radial-gradient(55% 50% at 95% 78%,  rgba(129, 68, 72, 0.10),  transparent 64%),
+    radial-gradient(40% 35% at 20% 96%,  rgba(176, 204, 194, 0.16), transparent 60%);
+}
+.page-actualites::after {
+  /* Quadrillage fin, façon grille de comptage / papier millimétré */
+  /* Désactivé pour le moment : fond laissé en blanc */
+  display: none;
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(129, 68, 72, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(129, 68, 72, 0.045) 1px, transparent 1px);
+  background-size: 46px 46px;
+  -webkit-mask-image: radial-gradient(120% 90% at 50% 0%, #000 35%, transparent 78%);
+          mask-image: radial-gradient(120% 90% at 50% 0%, #000 35%, transparent 78%);
+}
+
+/* Rythme partagé */
+.act-wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 40px; }
+
+/* ─────────────────────────── HERO ─────────────────────────── */
+.act-hero {
+  position: relative;
+  padding: 188px 0 70px;
+}
+.act-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  padding: 7px 16px 7px 13px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.66);
+  -webkit-backdrop-filter: blur(6px);
+          backdrop-filter: blur(6px);
+  margin-bottom: 28px;
+}
+.act-live-dot {
+  position: relative;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--bordeaux);
+  flex-shrink: 0;
+}
+.act-live-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--bordeaux);
+  animation: act-pulse 2s ease-out infinite;
+}
+.act-kicker-label {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--bordeaux);
+}
+.act-title {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: clamp(44px, 6.4vw, 84px);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  max-width: 14ch;
+  text-wrap: balance;
+}
+.act-accent { color: var(--bordeaux); }
+.act-lead {
+  margin-top: 28px;
+  max-width: 580px;
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 1.78;
+  color: var(--text);
+  text-wrap: pretty;
+}
+
+/* ─────────── Menu de bascule Actualités / Réseaux sociaux ─────────── */
+/* Compense la hauteur de l'en-tête fixe (le hero ayant été retiré) */
+.act-tabs-bar { padding-top: 150px; }
+.act-tabs {
+  display: inline-flex;
+  gap: 6px;
+  padding: 6px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper-raise);
+}
+.act-tab {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text);
+  background: transparent;
+  border: none;
+  border-radius: 999px;
+  padding: 11px 26px;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+.act-tab:hover { color: var(--bordeaux); }
+.act-tab.is-active { background: var(--bordeaux); color: #fff; }
+.act-panel[hidden] { display: none; }
+
+/* ───── En-tête de section (titre + sous-titre + flèches) ───── */
+.act-section { padding: 54px 0 86px; }
+/* Le panneau affiché juste sous le menu n'a pas besoin de compenser l'en-tête */
+.act-panel { padding-top: 30px; }
+
+.act-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  padding-bottom: 26px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid var(--line);
+}
+.act-head-text { display: flex; flex-direction: column; gap: 8px; }
+.act-eyebrow {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+}
+.act-h2 {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: clamp(28px, 3.6vw, 42px);
+  line-height: 1.06;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+.act-h2-sub {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 15px;
+  color: var(--text);
+}
+
+/* Flèches de carrousel */
+.act-nav { display: flex; gap: 10px; flex-shrink: 0; }
+.act-nav-bottom { justify-content: center; margin-top: 32px; }
+.act-arrow {
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  border: 1px solid var(--bordeaux);
+  background: transparent;
+  color: var(--bordeaux);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.25s ease, color 0.25s ease, opacity 0.25s ease;
+}
+.act-arrow:hover { background: var(--bordeaux); color: #fff; }
+.act-arrow:disabled { opacity: 0.3; cursor: default; }
+.act-arrow:disabled:hover { background: transparent; color: var(--bordeaux); }
+
+/* ───────────────── SUR LES RÉSEAUX (carrousel) ───────────────── */
+.act-social-track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - 48px) / 3);
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding-bottom: 6px;
+  scrollbar-width: none;
+}
+.act-social-track::-webkit-scrollbar { display: none; }
+
+.act-social-card {
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  background: var(--paper-raise);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.act-social-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 44px rgba(129, 68, 72, 0.10);
+}
+/* Liseré de couleur par réseau */
+.act-social-card { border-top: 3px solid var(--net, var(--bordeaux)); }
+.act-social-card[data-net="facebook"] { --net: var(--bordeaux); }
+.act-social-card[data-net="linkedin"] { --net: var(--sauge-deep); }
+.act-social-card[data-net="x"]        { --net: var(--terracotta); }
+
+.act-social-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 20px 14px;
+}
+.act-avatar {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background: var(--net, var(--bordeaux));
+}
+.act-social-id { display: flex; flex-direction: column; line-height: 1.25; }
+.act-social-name { font-family: var(--sans); font-weight: 600; font-size: 14px; color: var(--ink); }
+.act-social-handle { font-family: var(--sans); font-weight: 300; font-size: 12px; color: var(--text); }
+.act-social-platform { margin-left: auto; color: var(--net, var(--bordeaux)); opacity: 0.9; }
+
+.act-social-text {
+  padding: 2px 20px 16px;
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.62;
+  color: var(--text);
+  text-wrap: pretty;
+}
+.act-social-media {
+  margin: 0 20px;
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  background: var(--placeholder);
+  border: 1px solid var(--placeholder-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bordeaux);
+  overflow: hidden;
+}
+.act-social-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.act-social-foot {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 20px;
+}
+.act-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 13px;
+  color: var(--text);
+}
+.act-stat svg { color: var(--net, var(--bordeaux)); }
+.act-social-date {
+  margin-left: auto;
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 12px;
+  color: #9a8f8a;
+}
+
+/* ───────────────── VEILLE ACTUALITÉS (grille) ───────────────── */
+.act-veille { background: rgba(255, 255, 255, 0.5); }
+
+.act-news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.act-news-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--paper-raise);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.act-news-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 44px rgba(129, 68, 72, 0.10);
+}
+.act-news-media {
+  aspect-ratio: 16 / 9;
+  background: var(--placeholder);
+  border-bottom: 1px solid var(--line-soft);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bordeaux);
+  overflow: hidden;
+}
+/* L'image de couverture remplit tout le cadre sans se déformer */
+.act-news-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* Pastille de catégorie posée sur le visuel */
+.act-cat {
+  position: absolute;
+  top: 14px; left: 14px;
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--cat, var(--bordeaux));
+  padding: 5px 11px;
+  border-radius: 999px;
+}
+.act-news-card[data-cat="biotech"]       { --cat: var(--bordeaux); }
+.act-news-card[data-cat="formation"]     { --cat: var(--terracotta); }
+.act-news-card[data-cat="recherche"]     { --cat: var(--sauge-deep); }
+.act-news-card[data-cat="sante"]         { --cat: var(--bordeaux); }
+.act-news-card[data-cat="environnement"] { --cat: var(--terracotta); }
+.act-news-card[data-cat="espace"]        { --cat: var(--sauge-deep); }
+
+.act-news-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+  padding: 22px 22px 20px;
+}
+.act-news-title {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.act-news-excerpt {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text);
+  flex: 1;
+  text-wrap: pretty;
+}
+.act-news-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line-soft);
+}
+.act-news-meta { display: flex; flex-direction: column; line-height: 1.4; }
+.act-news-source { font-family: var(--sans); font-weight: 500; font-size: 12px; color: var(--cat, var(--bordeaux)); }
+.act-news-date { font-family: var(--sans); font-weight: 300; font-size: 12px; color: #9a8f8a; }
+.act-news-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--bordeaux);
+  text-decoration: none;
+  transition: gap 0.2s ease;
+}
+.act-news-link:hover { gap: 10px; }
+
+/* ─────────────── Bandeau « Voir tout / s'abonner » ─────────────── */
+.act-cta-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+/* ─────────────────────────── REVEAL ─────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ─────────────────────────── ANIMATIONS ─────────────────────────── */
+@keyframes act-pulse {
+  0%   { transform: scale(1);   opacity: 0.55; }
+  100% { transform: scale(2.6); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .act-live-dot::after { animation: none; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .act-social-track { scroll-behavior: auto; }
+}
+
+/* ─────────────────────────── RESPONSIVE ─────────────────────────── */
+@media (max-width: 960px) {
+  .act-wrap { padding: 0 28px; }
+  .act-social-track { grid-auto-columns: calc((100% - 24px) / 2); }
+  .act-news-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .act-hero { padding-top: 150px; }
+  .act-social-track { grid-auto-columns: 86%; }
+  .act-news-grid { grid-template-columns: 1fr; }
+  .act-head { flex-wrap: wrap; }
+}

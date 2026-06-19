@@ -1,0 +1,274 @@
+/* ════════════════════════════════════════════════════════════
+   Page DEMANDEURS D'EMPLOI — grille de cartes « catalogue »
+   Image en haut · intitulé · titre · description · étiquettes.
+   Réutilise les jetons de styles.css (couleurs, polices).
+   ════════════════════════════════════════════════════════════ */
+
+.page-demandeurs {
+  --line: #e6ded9;
+  --line-soft: #efe8e3;
+  --pill-bg: #eef4f1;
+}
+
+/* Première section : compense la hauteur de l'en-tête fixe
+   maintenant que le bloc d'introduction a été retiré. */
+.de-first { padding-top: 150px; }
+
+/* ─────────────────── Barre de filtres ─────────────────── */
+.de-filter {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 28px 30px 22px;
+  margin-bottom: 40px;
+  box-shadow: 0 10px 30px rgba(129, 68, 72, 0.05);
+}
+.de-filter-row {
+  display: grid;
+  grid-template-columns: 2fr 1.3fr;
+  gap: 26px;
+  align-items: end;
+}
+.de-field { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.de-label {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--bordeaux);
+}
+
+/* Champ de recherche */
+.de-search { position: relative; }
+.de-search svg {
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  transform: translateY(-50%);
+  color: #9a8f8a;
+  pointer-events: none;
+}
+.de-search input {
+  width: 100%;
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 15px;
+  color: var(--text);
+  padding: 13px 16px 13px 44px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.de-search input::placeholder { color: #b3a8a3; }
+.de-search input:focus {
+  border-color: var(--bordeaux);
+  box-shadow: 0 0 0 3px rgba(129, 68, 72, 0.10);
+}
+
+/* Menu déroulant (Discipline) */
+.de-select {
+  position: relative;
+}
+.de-select select {
+  width: 100%;
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 15px;
+  color: var(--text);
+  padding: 13px 42px 13px 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.de-select select:focus {
+  border-color: var(--bordeaux);
+  box-shadow: 0 0 0 3px rgba(129, 68, 72, 0.10);
+}
+.de-select::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 18px;
+  width: 9px; height: 9px;
+  border-right: 1.8px solid var(--bordeaux);
+  border-bottom: 1.8px solid var(--bordeaux);
+  transform: translateY(-65%) rotate(45deg);
+  pointer-events: none;
+}
+
+/* Pied de la barre : résultats + réinitialiser */
+.de-filter-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line-soft);
+}
+.de-results {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--text);
+}
+.de-reset {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--text);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.de-reset:hover { color: var(--bordeaux); }
+
+/* Message « aucun résultat » */
+.de-empty {
+  display: none;
+  text-align: center;
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 17px;
+  color: var(--text);
+  padding: 50px 0;
+}
+.de-empty.is-shown { display: block; }
+
+/* ─────────────────── Grille 3 colonnes ─────────────────── */
+.de-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+}
+
+/* ─────────────────── Carte formation ─────────────────── */
+.de-card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.de-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 46px rgba(129, 68, 72, 0.12);
+  border-color: var(--line-soft);
+}
+
+/* Visuel en haut (placeholder photo) */
+.de-card-media {
+  aspect-ratio: 16 / 10;
+  background: var(--placeholder);
+  border-bottom: 1px solid var(--line-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bordeaux);
+}
+.de-card-media { overflow: hidden; }
+.de-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.de-card:hover .de-card-media img { transform: scale(1.04); }
+
+/* Corps de la carte */
+.de-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  padding: 22px 22px 24px;
+}
+.de-card-eyebrow {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+}
+.de-card-title {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.de-card-text {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.62;
+  color: var(--text);
+  flex: 1;
+  text-wrap: pretty;
+}
+
+/* Date de session */
+.de-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--bordeaux);
+  margin-top: 2px;
+}
+.de-date svg { color: var(--terracotta); flex-shrink: 0; }
+.de-date strong { font-weight: 600; }
+
+/* Étiquettes (pills) en bas de carte */
+.de-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+.de-tag {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.01em;
+  color: var(--bordeaux);
+  background: var(--pill-bg);
+  padding: 6px 13px;
+  border-radius: 999px;
+}
+/* Étiquette mise en avant (ex. « Gratuit ») */
+.de-tag--accent {
+  color: #fff;
+  background: var(--bordeaux);
+}
+
+/* Carte masquée par le filtre */
+.de-card.is-hidden { display: none; }
+
+/* ─────────────────── Responsive ─────────────────── */
+@media (max-width: 960px) {
+  .de-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .de-grid { grid-template-columns: 1fr; }
+  .de-filter-row { grid-template-columns: 1fr; }
+  .de-filter { padding: 22px 20px 18px; }
+}

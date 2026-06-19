@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc data-props='{"headingFont":{"editor":"enum","options":["Bodoni Moda","Playfair Display","Libre Baskerville","DM Serif Display"],"default":"Bodoni Moda","tsType":"string"},"bodyFont":{"editor":"enum","options":["Catamaran","Source Sans 3","Lato","Nunito Sans"],"default":"Catamaran","tsType":"string"}}'>
+
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,700&family=Catamaran:wght@100;300;400;500;600&family=Playfair+Display:wght@400;700&family=Libre+Baskerville:wght@400;700&family=DM+Serif+Display&family=Source+Sans+3:wght@300;400;500;600&family=Lato:wght@300;400;700&family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,500;6..12,600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: #FFFFFF; overflow-x: hidden; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    #pour-qui, #installations, #partenaires, #contact { scroll-margin-top: 80px; }
+    @keyframes marquee-scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    @keyframes float-gentle {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-7px); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      [data-marquee-track] { animation-play-state: paused !important; }
+      [data-float-badge] { animation: none !important; }
+    }
+    [data-newsletter-input]::placeholder { color: rgba(255,255,255,0.45); }
+    [data-chat-input]::placeholder { color: #aaa; }
+    @media (max-width: 960px) {
+      [data-hero-grid] { grid-template-columns: 1fr !important; gap: 48px !important; }
+      [data-audience-grid] { grid-template-columns: 1fr 1fr !important; }
+      [data-history-grid] { grid-template-columns: 1fr !important; gap: 40px !important; }
+      [data-install-grid] { grid-template-columns: 1fr !important; }
+      [data-install-sub] { grid-template-columns: 1fr 1fr !important; }
+      [data-footer-cols] { grid-template-columns: 1fr 1fr !important; gap: 48px !important; }
+      [data-nav-links] { display: none !important; }
+      [data-nav-cta] { display: none !important; }
+      [data-mobile-btn] { display: flex !important; }
+    }
+    @media (max-width: 640px) {
+      [data-audience-grid] { grid-template-columns: 1fr !important; }
+      [data-hero-h1] { font-size: 40px !important; }
+      [data-section-h2] { font-size: 32px !important; }
+      [data-footer-cols] { grid-template-columns: 1fr !important; }
+      [data-install-sub] { grid-template-columns: 1fr !important; }
+    }
+  </style>
+</helmet>
+
+<!-- ════════════════════════════════════════════ HEADER ════════════════════════════════════════════ -->
+<header style="position: fixed; top: 0; left: 0; right: 0; z-index: 100; transition: background 0.35s ease, box-shadow 0.35s ease; background: {{ headerBg }}; box-shadow: {{ headerShadow }};">
+  <div style="max-width: 1200px; margin: 0 auto; padding: 18px 32px; display: flex; align-items: center; justify-content: space-between;">
+    <a href="#accueil" style="text-decoration: none; display: flex; align-items: center; gap: 10px;">
+      <img src="./logo.png" alt="Culture In Vivo" style="height: 90px; width: auto; flex-shrink: 0;" />
+    </a>
+
+    <nav data-nav-links style="display: flex; align-items: center; gap: 32px;">
+      <a href="#accueil" style="font-family: 'Catamaran', sans-serif; font-weight: 400; font-size: 15px; color: #353535; text-decoration: none; transition: color 0.2s;" style-hover="color: #814448;">Accueil</a>
+      <a href="#pour-qui" style="font-family: 'Catamaran', sans-serif; font-weight: 400; font-size: 15px; color: #353535; text-decoration: none; transition: color 0.2s;" style-hover="color: #814448;">Formations</a>
+      <a href="#installations" style="font-family: 'Catamaran', sans-serif; font-weight: 400; font-size: 15px; color: #353535; text-decoration: none; transition: color 0.2s;" style-hover="color: #814448;">Laboratoires</a>
+      <a href="#partenaires" style="font-family: 'Catamaran', sans-serif; font-weight: 400; font-size: 15px; color: #353535; text-decoration: none; transition: color 0.2s;" style-hover="color: #814448;">Partenaires</a>
+      <a href="#contact" style="font-family: 'Catamaran', sans-serif; font-weight: 400; font-size: 15px; color: #353535; text-decoration: none; transition: color 0.2s;" style-hover="color: #814448;">Contact</a>
+    </nav>
+
+    <a data-nav-cta href="#contact" style="font-family: 'Catamaran', sans-serif; font-weight: 500; font-size: 14px; color: #814448; border: 1.5px solid #814448; padding: 9px 22px; text-decoration: none; letter-spacing: 0.03em; transition: all 0.25s;" style-hover="background: #814448; color: #ffffff;">Nous contacter</a>
+
+    <button data-mobile-btn onClick="{{ toggleMenu }}" style="display: none; background: none; border: none; cursor: pointer; padding: 8px; align-items: center; justify-content: center;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <line x1="3" y1="6" x2="21" y2="6" stroke="#000" stroke-width="2" stroke-linecap="round"></line>
+        <line x1="3" y1="12" x2="21" y2="12" stroke="#000" stroke-width="2" stroke-linecap="round"></line>
+        <line x1="3" y1="18" x2="21" y2="18" stroke="#000" stroke-width="2" stroke-linecap="round"></line>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile overlay -->
+<sc-if value="{{ mobileMenuOpen }}">
+  <div style="position: fixed; inset: 0; z-index: 200; background: rgba(255,255,255,0.98); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px;">
+    <button onClick="{{ toggleMenu }}" style="position: absolute; top: 20px; right: 28px; background: none; border: none; cursor: pointer; font-family: 'Catamaran', sans-serif; font-size: 28px; color: #000; line-height: 1;">✕</button>
+    <a href="#accueil" onClick="{{ closeMenu }}" style="font-family: 'Bodoni Moda', serif; font-weight: 700; font-size: 26px; color: #000; text-decoration: none;">Accueil</a>
+    <a href="#pour-qui" onClick="{{ closeMenu }}" style="font-family: 'Bodoni Moda', serif; font-weight: 700; font-size: 26px; color: #000; text-decoration: none;">Formations</a>
+    <a href="#installations" onClick="{{ closeMenu }}" style="font-family: 'Bodoni Moda', serif; font-weight: 700; font-size: 26px; color: #000; text-decoration: none;">Laboratoires</a>
+    <a href="#partenaires" onClick="{{ closeMenu }}" style="font-family: 'Bodoni Moda', serif; font-weight: 700; font-size: 26px; color: #000; text-decoration: none;">Partenaires</a>
+    <a href="#contact" onClick="{{ closeMenu }}" style="font-family: 'Bodoni Moda', serif; font-weight: 700; font-size: 26px; color: #000; text-decoration: none;">Contact</a>
+  </div>
+</sc-if>
+
+<!-- ════════════════════════════════════════════ HERO ════════════════════════════════════════════ -->
+<section id="accueil" data-screen-label="Hero" style="padding: 150px 32px 100px; background: #ffffff;">
+  <div data-hero-grid style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.15fr 1fr; gap: 56px; align-items: center;">
+    <!-- Texte -->
+    <div data-hero-text style="display: flex; flex-direction: column; align-items: flex-start; gap: 24px;">
+      <span style="font-family: 'Catamaran', sans-serif; font-weight: 500; font-size: 12px; color: #814448; letter-spacing: 0.16em; text-transform: uppercase; border: 1.5px solid rgba(129,68,72,0.35); padding: 6px 18px;">Sciences du vivant · Nivelles</span>
+
+      <h1 data-hero-h1 style="font-family: 'Bodoni Moda', serif; font-weight: 700; font-size: 58px; line-height: 1.08; color: #000000; letter-spacing: -0.02em; text-wrap: balance;">Les sciences du vivant, <span style="color: #814448;">par la pratique.</span></h1>
+
+      <p style="font-family: 'Catamaran', sans-serif; font-weight: 100; font-size: 20px; line-height: 1.7; color: #353535; max-width: 500px; text-wrap: pretty;">Formations qualifiantes, ateliers scientifiques et laboratoires équipés : Culture In Vivo accompagne étudiants, chercheurs d'emploi, enseignants et professionnels depuis plus de vingt ans.</p>
+
+      <div style="display: flex; gap: 14px; align-items: center; flex-wrap: wrap; margin-top: 8px;">
+        <a href="#pour-qui" style="font-family: 'Catamaran', sans-serif; font-weight: 500; font-size: 15px; color: #ffffff; background: #814448; padding: 14px 30px; text-decoration: none; letter-spacing: 0.02em; transition: background 0.25s;" style-hover="background: #6a373b;">Trouver mon parcours</a>
+        <a href="#installations" style="font-family: 'Catamaran', sans-serif; font-weight: 500; font-size: 15px; color: #814448; border: 1.5px solid #814448; padding: 13px 26px; text-decoration: none; letter-spacing: 0.02em; background: transparent; transition: all 0.25s;" style-hover="background: #814448; color: #ffffff;">Découvrir nos laboratoires</a>
+      </div>
+    </div>
+
+    <!-- Visuel -->
+    <div style="position: relative;">
+      <div style="position: absolute; top: -24px; right: -16px; width: 60%; height: 70%; background: #B0CCC2; opacity: 0.25; z-index: 0;"></div>
+      <div style="position: relative; z-index: 1; aspect-ratio: 4/5; background: linear-gradient(150deg, #f9f6f5 0%, #f1edeb 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; border: 1px solid #e8e0dd;">
+        <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+          <rect x="8" y="11" width="28" height="22" rx="2" stroke="#814448" stroke-width="1.4" fill="none"></rect>
+          <circle cx="22" cy="22" r="6" stroke="#814448" stroke-width="1.4" fill="none"></circle>
+          <circle cx="22" cy="22" r="2" fill="#814448"></circle>
+        </svg>
+        <span style="font-family: 'Catamaran', sans-serif; font-weight: 300; font-size: 12px; color: #814448; letter-spacing: 0.06em; text-transform: uppercase;">Photo · Laboratoire Culture In Vivo</span>
+      </div>
+      <div data-float-badge style="position: absolute; bottom: 28px; left: -28px; z-index: 2; background: #ffffff; padding: 18px 22px; box-shadow: 0 8px 28px rgba(0,0,0,0.07); display: flex; flex-direction: column; gap: 2px; animation: float-gentle 4.5s ease-in-out infinite;">
+        <span style="font-family: 'Bodoni Moda', serif; font-weight: 700; font-size: 30px; color: #814448; line-height: 1;">20+</span>
+        <span style="font-family: 'Catamaran', sans-serif; font-weight: 300; font-size: 12px; color: #353535; letter-spacing: 0.02em;">ans d'expertise</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════ POUR QUI ════════════════════════════════════════════ -->
+<section id="pour-qui" data-screen-label="Pour qui" style="padding: 100px 32px; background: #f4f8f6;">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <div style="text-align: center; margin-bottom: 60px;">
+      <span style="font-family: 'Catamaran', sans-serif; font-weight: 500; font-size: 12px; color: #814448; letter-spacing: 0.16em; text-transform: uppercase;">Nos publics</span>
+      <h2 data-section-h2 style="font-family: 'Bodoni Moda', serif; font-weight: 700; font-size: 44px; color: #000000; margin-top: 12px; letter-spacing: -0.02em; text-wrap: balance;">À qui s'adressent nos formations ?</h2>
+      <p style="font-family: 'Catamaran', sans-serif; font-weight: 100; font-size: 18px; color: #353535; margin-top: 14px; max-width: 520px; margin-left: auto; margin-right: auto; line-height: 1.65; text-wrap: pretty;">Quatre publics, un même engagement : rendre les sciences du vivant accessibles et concrètes.</p>
+    </div>
+
+    <div data-audience-grid style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+      <!-- Écoles -->
+      <div style="background: #ffffff; padding: 36px 32px; border-top: 3px solid #814448; transition: transform 0.3s ease, box-shadow 0.3s ease;" style-hover="transform: translateY(-4px); box-shadow: 0 12px 36px rgba(129,68,72,0.08);">
+        <div style="width: 44px; height: 44px; background: rgba(129,68,72,0.07); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 18px;">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M2 7 L10 3 L18 7 L10 11 Z" stroke="#814448" stroke-width="1.4" fill="none"></path>
+            <path d="M4.5 8.5 L4.5 13.5 L10 16 L15.5 13.5 L15.5 8.5" stroke="#814448" stroke-width="1.4" fill="none"></path>
+          </svg>
+        </div>
+        <h3 style="font-family: 'Bodoni Moda', serif; font-weight: 700; font-size: 22px; color: #000000; margin-bottom: 8px;">Écoles</h3>
+        <p style="font-family: 'Catamaran', sans-serif; font-weight: 100; font-size: 17px; color: #353535; line-height: 1.6; margin-bottom: 18px; text-wrap: pretty;">Animations et ateliers scientifiques pour éveiller la curiosité, du microscope à l'ADN.</p>
+        <a href="#" style="font-family: 'Catamaran', sans-serif; font-weight: 500; font-size: 14px; color: #814448; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: gap 0.2s ease;" style-hover="gap: 10px;">Découvrir les animations <span style="font-size: 16px;">→</span></a>
+      </div>
+
+      <!-- Demandeurs d'emploi -->
+      <div style="background: #ffffff; padding: 36px 32px; border-top: 3px solid #CF9979; transition: transform 0.3s ease, box-shadow 0.3s ease;" style-hover="transform: translateY(-4px); box-shadow: 0 12px 36px rgba(207,153,121,0.12);">
+        <div style="width: 44px; height: 44px; background: rgba(207,153,121,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 18px;">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <line x1="10" y1="16" x2="10" y2="5" stroke="#CF9979" stroke-width="1.4" stroke-linecap="round"></line>
+            <polyline points="6,9 10,5 14,9" stroke="#CF9979" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none"></polyline>
+          </svg>
+        </div>
+        <h3 style="font-family: 'Bodoni Moda', serif; font-weight: 700; font-size: 22px; color: #000000; margin-bottom: 8px;">Demandeurs d'emploi</h3>
+        <p style="font-family: 'Catamaran', sans-serif; font-weight: 100; font-size: 17px; color: #353535; line-height: 1.6; margin-bottom: 18px; text-wrap: pretty;">Formations qualifiantes, souvent gratuites, vers les métiers des biotechnologies et de la biopharmacie.</p>
+        <a href="#" style="font-family: 'Catamaran', sans-serif; font-weight: 500; font-size: 14px; color: #814448; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: gap 0.2s ease;" style-hover="gap: 10px;">Voir les formations <span style="font-size: 16px;">→</span></a>
+      </div>
+
+      <!-- Enseignement supérieur -->
+      <div style="background: #ffffff; padding: 36px 32px; border-top: 3px solid #B0CCC2; transition: transform 0.3s ease, box-shadow 0.3s ease;" style-hover="transform: translateY(-4px); box-shadow: 0 12px 36px rgba(176,204,194,0.15);">
+        <div style="width: 44px; height: 44px; background: rgba(176,204,194,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 18px;">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M10 5 L10 17" stroke="#6a9e8e" stroke-width="1.4" stroke-linecap="round"></path>
+            <path d="M10 5 C10 5 7.5 3.5 3 4.5 L3 16 C7.5 15 10 17 10 17" stroke="#6a9e8e" stroke-width="1.4" fill="none"></path>
+            <path d="M10 5 C10 5 12.5 3.5 17 4.5 L17 16 C12.5 15 10 17 10 17" stroke="#6a9e8e" stroke-width="1.4" fill="none"></path>
+          </svg>
+        </div>
+        <h3 style="font-family: 'Bodoni Moda', serif; font-weight: 700; font-size: 22px; color: #000000; margin-bottom: 8px;">Enseignement supérieur</h3>
+        <p style="font-family: 'Catamaran', sans-serif; font-weight: 100; font-size: 17px; color: #353535; line-height: 1.6; margin-bottom: 18px; text-wrap: pretty;">Travaux pratiques en laboratoire pour les étudiants de Hautes Écoles et de promotion sociale.</p>
+        <a href="#" style="font-family: 'Catamaran', sans-serif; font-weight: 500; font-size: 14px; color: #814448; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: gap 0.2s ease;" style-hover="gap: 10px;">Explorer les programmes <span style="font-size: 16px;">→</span></a>
+      </div>
+
+      <!-- Entreprises -->
+      <div style="background: #ffffff; padding: 36px 32px; border-top: 3px solid #814448; transition: transform 0.3s ease, box-shadow 0.3s ease;" style-hover="transform: translateY(-4px); box-shadow: 0 12px 36px rgba(129,68,72,0.08);">
+        <div style="width: 44px; height: 44px; background: rgba(129,68,72,0.07); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 18px;">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <rect x="3" y="8" width="14" height="10" rx="1.5" stroke="#814448" stroke-width="1.4" fill="none"></rect>
+            <path d="M7 8 L7 5.5 C7 4.7 7.7 4 8.5 4 L11.5 4 C12.3 4 13 4.7 13 5.5 L13 8" stroke="#814448" stroke-width="1.4" fill="none"></path>
+            <line x1="3" y1="12" x2="17" y2="12" stroke="#814448" stroke-width="1"></line>
+          </svg>
+        </div>
+        <h3 style="font-family: 'Bodoni Moda', serif; font-weight: 700; font-size: 22px; color: #000000; margin-bottom: 8px;">Entreprises</h3>
+        <p style="font-family: 'Catamaran', sans-serif; font-weight: 100; font-size: 17px; color: #353535; line-height: 1.6; margin-bottom: 18px; text-wrap: pretty;">Formations théoriques et techniques en GMP, affaires réglementaires et procédés biotech.</p>
+        <a href="#" style="font-family: 'Catamaran', sans-serif; font-weight: 500; font-size: 14px; color: #814448; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: gap 0.2s ease;" style-hover="gap: 10px;">Consulter le catalogue <span style="font-size: 16px;">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════ HISTORIQUE ════════════════════════════════════════════ -->
+<section data-screen-label="Historique" style="padding: 100px 32px; background: #ffffff;">
+  <div data-history-grid style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 5fr 7fr; gap: 56px; align-items: center;">
+    <div style="aspect-ratio: 4/3; background: linear-gradient(150deg, #f9f6f5 0%, #f1edeb 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; border: 1px solid #e8e0dd;">
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+        <rect x="6" y="10" width="28" height="20" rx="2" stroke="#814448" stroke-width="1.4" fill="none"></rect>
+        <circle cx="20" cy="20" r="5" stroke="#814448" stroke-width="1.4" fill="none"></circle>
+        <circle cx="20" cy="20" r="1.5" fill="#814448"></circle>
+      </svg>
+      <span style="font-family: 'Catamaran', sans-serif; font-weight: 300; font-size: 11px; color: #814448; letter-spacing: 0.06em; text-transform: uppercase;">Photo · Équipe et laboratoires</span>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 18px;">
+      <span style="font-family: 'Catamaran', sans-serif; font-weight: 500; font-size: 12px; color: #814448; letter-spacing: 0.16em; text-transform: uppercase;">Notre histoire</span>
+      <h2 data-section-h2 style="font-family: 'Bodoni Moda', serif; font-weight: 700; font-size: 40px; color: #000000; letter-spacing: -0.02em; line-height: 1.12; text-wrap: balance;">Depuis le début des années 2000, au service du vivant</h2>
+      <p style="font-family: 'Catamaran', sans-serif; font-weight: 100; font-size: 18px; color: #353535; line-height: 1.75; text-wrap: pretty;">Fondée sous le nom de Nivelles Laboratoires, l'ASBL Culture In Vivo s'est imposée comme un acteur de référence dans la promotion et l'enseignement des sciences du vivant en Belgique. Biotechnologies, biologie moléculaire, microbiologie, virologie, immunologie : nos formations couvrent l'ensemble du spectre des disciplines liées au vivant.</p>
+      <p style="font-family: 'Catamaran', sans-serif; font-weight: 100; font-size: 18px; color: #353535; line-height: 1.75; text-wrap: pretty;">Depuis plus de vingt ans, nous ouvrons nos laboratoires à celles et ceux qui veulent comprendre, apprendre et agir.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════ INSTALLATIONS ════════════════════════════════════════════ -->
+<section id="installations" data-screen-label="Installations" style="padding: 100px 32px; background: #fdfaf8;">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <div style="text-align: center; margin-bottom: 52px;">
+      <span style="font-family: 'Catamaran', sans-serif; font-weight: 500; font-size: 12px; color: #814448; letter-spacing: 0.16em; text-transform: uppercase;">Nos espaces</span>
+      <h2 data-section-h2 style="font-family: 'Bodoni Moda', serif; font-weight: 700; font-size: 44px; color: #000000; margin-top: 12px; letter-spacing: -0.02em;">Des installations dédiées à l'excellence</h2>
+      <p style="font-family: 'Catamaran', sans-serif; font-weight: 100; font-size: 18px; color: #353535; margin-top: 14px; max-width: 520px; margin-left: auto; margin-right: auto; line-height: 1.65; text-wrap: pretty;">Nos propres laboratoires et salles blanches, au service de la formation et de la recherche appliquée.</p>
+    </div>
+
+    <div data-install-grid style="display: grid; grid-template-columns: 7fr 5fr; gap: 20px;">
+      <div style="aspect-ratio: 16/10; background: linear-gradient(150deg, #f9f6f5 0%, #f1edeb 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; border: 1px solid #e8e0dd;">
+        <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+          <path d="M16 36 L16 16 L20 8 L24 8 L28 16 L28 36" stroke="#814448" stroke-width="1.4" fill="none"></path>
+          <line x1="12" y1="36" x2="32" y2="36" stroke="#814448" stroke-width="1.4"></line>
+          <circle cx="22" cy="25" r="3" stroke="#814448" stroke-width="1.2" fill="none"></circle>
+        </svg>
+        <span style="font-family: 'Catamaran', sans-serif; font-weight: 300; font-size: 11px; color: #814448; letter-spacing: 0.06em; text-transform: uppercase;">Photo · Laboratoire biologie moléculaire</span>
+      </div>
+
+      <div data-install-sub style="display: grid; grid-template-rows: 1fr 1fr; gap: 20px;">
+        <div style="background: linear-gradient(150deg, #f9f6f5 0%, #f1edeb 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; border: 1px solid #e8e0dd; padding: 20px;">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+            <rect x="6" y="6" width="24" height="24" rx="2" stroke="#814448" stroke-width="1.4" fill="none"></rect>
+            <rect x="12" y="12" width="12" height="12" rx="1" stroke="#814448" stroke-width="1" stroke-dasharray="3 2" fill="none"></rect>
+          </svg>
+          <span style="font-family: 'Catamaran', sans-serif; font-weight: 300; font-size: 11px; color: #814448; letter-spacing: 0.06em; text-transform: uppercase; text-align: center;">Photo · Salle blanche virologie</span>
+        </div>
+        <div style="background: linear-gradient(150deg, #f9f6f5 0%, #f1edeb 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; border: 1px solid #e8e0dd; padding: 20px;">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+            <polygon points="18,4 32,12 32,28 18,32 4,28 4,12" stroke="#814448" stroke-width="1.4" fill="none"></polygon>
+          </svg>
+          <span style="font-family: 'Catamaran', sans-serif; font-weight: 300; font-size: 11px; color: #814448; letter-spacing: 0.06em; text-transform: uppercase; text-align: center;">Photo · Hotte octogonale sur mesure</span>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-family: 'Catamaran', sans-serif; font-weight: 100; font-size: 17px; color: #353535; margin-top: 28px; text-align: center; max-width: 680px; margin-left: auto; margin-right: auto; line-height: 1.65; text-wrap: pretty;">Culture cellulaire, virologie, biologie moléculaire : chaque espace est conçu pour offrir des conditions réelles de travail. Notre hotte octogonale, dispositif unique en son genre, illustre notre engagement pour des équipements à la hauteur des exigences du secteur.</p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════ PARTENAIRES ════════════════════════════════════════════ -->
+<section id="partenaires" data-screen-label="Partenaires" style="padding: 64px 0; background: #ffffff; border-top: 1px solid #eee; border-bottom: 1px solid #eee;">
+  <div style="max-width: 1200px; margin: 0 auto; padding: 0 32px; margin-bottom: 36px;">
+    <h2 style="font-family: 'Bodoni Moda', serif; font-weight: 700; font-size: 30px; color: #000000; text-align: center; letter-spacing: -0.01em;">Ils nous font confiance</h2>
+  </div>
+  <div style="overflow: hidden; width: 100%;">
+    <div data-marquee-track style="display: flex; gap: 40px; align-items: center; width: max-content; animation: marquee-scroll 36s linear infinite;" style-hover="animation-play-state: paused;">
+      <div style="flex-shrink: 0; width: 152px; height: 68px; background: #f8f6f5; border: 1px solid #ece6e3; display: flex; align-items: center; justify-content: center;"><span style="font-family: 'Catamaran', sans-serif; font-weight: 400; font-size: 14px; color: #814448; letter-spacing: 0.04em;">Forem</span></div>
+      <div style="flex-shrink: 0; width: 152px; height: 68px; background: #f8f6f5; border: 1px solid #ece6e3; display: flex; align-items: center; justify-content: center;"><span style="font-family: 'Catamaran', sans-serif; font-weight: 400; font-size: 14px; color: #814448; letter-spacing: 0.04em;">ULiège</span></div>
+      <div style="flex-shrink: 0; width: 152px; height: 68px; background: #f8f6f5; border: 1px solid #ece6e3; display: flex; align-items: center; justify-content: center;"><span style="font-family: 'Catamaran', sans-serif; font-weight: 400; font-size: 14px; color: #814448; letter-spacing: 0.04em;">UNamur</span></div>
+      <div style="flex-shrink: 0; width: 152px; height: 68px; background: #f8f6f5; border: 1px solid #ece6e3; display: flex; align-items: center; justify-content: center;"><span style="font-family: 'Catamaran', sans-serif; font-weight: 400; font-size: 14px; color: #814448; letter-spacing: 0.04em;">ULB</span></div>
+      <div style="flex-shrink: 0; width: 152px; height: 68px; background: #f8f6f5; border: 1px solid #ece6e3; display: flex; align-items: center; justify-content: center;"><span style="font-family: 'Catamaran', sans-serif; font-weight: 400; font-size: 14px; color: #814448; letter-spacing: 0.04em;">AFMPS</span></div>
+      <div style="flex-shrink: 0; width: 152px; height: 68px; background: #f8f6f5; border: 1px solid #ece6e3; display: flex; align-items: center; justify-content: center;"><span style="font-family: 'Catamaran', sans-serif; font-weight: 400; font-size: 14px; color: #814448; letter-spacing: 0.04em;">Aptaskil</span></div>
+      <div style="flex-shrink: 0; width: 152px; height: 68px; background: #f8f6f5; border: 1px solid #ece6e3; display: flex; align-items: center; justify-content: center;"><span style="font-family: 'Catamaran', sans-serif; font-weight: 400; font-size: 14px; color: #814448; letter-spacing: 0.04em;">FSE</span></div>
+      <div style="flex-shrink: 0; width: 152px; height: 68px; background: #f8f6f5; border: 1px solid #ece6e3; display: flex; align-items: center; justify-content: center;"><span style="font-family: 'Catamaran', sans-serif; font-weight: 400; font-size: 14px; color: #814448; letter-spacing: 0.04em;">Condorcet</span></div>
+      <!-- Duplicate -->
+      <div style="flex-shrink: 0; width: 152px; height: 68px; background: #f8f6f5; border: 1px solid #ece6e3; display: flex; align-items: center; justify-content: center;"><span style="font-family: 'Catamaran', sans-serif; font-weight: 400; font-size: 14px; color: #814448; letter-spacing: 0.04em;">Forem</span></div>
+      <div style="flex-shrink: 0; width: 152px; height: 68px; background: #f8f6f5; border: 1px solid #ece6e3; display: flex; align-items: center; justify-content: center;"><span style="font-family: 'Catamaran', sans-serif; font-weight: 400; font-size: 14px; color: #814448; letter-spacing: 0.04em;">ULiège</span></div>
+      <div style="flex-shrink: 0; width: 152px; height: 68px; background: #f8f6f5; border: 1px solid #ece6e3; display: flex; align-items: center; justify-content: center;"><span style="font-family: 'Catamaran', sans-serif; font-weight: 400; font-size: 14px; color: #814448; letter-spacing: 0.04em;">UNamur</span></div>
+      <div style="flex-shrink: 0; width: 152px; height: 68px; background: #f8f6f5; border: 1px solid #ece6e3; display: flex; align-items: center; justify-content: center;"><span style="font-family: 'Catamaran', sans-serif; font-weight: 400; font-size: 14px; color: #814448; letter-spacing: 0.04em;">ULB</span></div>
+      <div style="flex-shrink: 0; width: 152px; height: 68px; background: #f8f6f5; border: 1px solid #ece6e3; display: flex; align-items: center; justify-content: center;"><span style="font-family: 'Catamaran', sans-serif; font-weight: 400; font-size: 14px; color: #814448; letter-spacing: 0.04em;">AFMPS</span></div>
+      <div style="flex-shrink: 0; width: 152px; height: 68px; background: #f8f6f5; border: 1px solid #ece6e3; display: flex; align-items: center; justify-content: center;"><span style="font-family: 'Catamaran', sans-serif; font-weight: 400; font-size: 14px; color: #814448; letter-spacing: 0.04em;">Aptaskil</span></div>
+      <div style="flex-shrink: 0; width: 152px; height: 68px; background: #f8f6f5; border: 1px solid #ece6e3; display: flex; align-items: center; justify-content: center;"><span style="font-family: 'Catamaran', sans-serif; font-weight: 400; font-size: 14px; color: #814448; letter-spacing: 0.04em;">FSE</span></div>
+      <div style="flex-shrink: 0; width: 152px; height: 68px; background: #f8f6f5; border: 1px solid #ece6e3; display: flex; align-items: center; justify-content: center;"><span style="font-family: 'Catamaran', sans-serif; font-weight: 400; font-size: 14px; color: #814448; letter-spacing: 0.04em;">Condorcet</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════ FOOTER ════════════════════════════════════════════ -->
+<footer id="contact" data-screen-label="Footer" style="padding: 72px 32px 0; background: #814448;">
+  <div data-footer-cols style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 56px; padding-bottom: 56px; border-bottom: 1px solid rgba(255,255,255,0.15);">
+    <!-- Newsletter -->
+    <div>
+      <h3 style="font-family: 'Bodoni Moda', serif; font-weight: 700; font-size: 21px; color: #ffffff; margin-bottom: 10px;">Restez informé</h3>
+      <p style="font-family: 'Catamaran', sans-serif; font-weight: 100; font-size: 16px; color: rgba(255,255,255,0.8); line-height: 1.65; margin-bottom: 18px;">Recevez nos actualités et dates de sessions directement dans votre boîte mail.</p>
+      <form onSubmit="{{ submitNewsletter }}" style="display: flex; gap: 0;">
+        <input data-newsletter-input type="email" value="{{ email }}" onChange="{{ setEmail }}" placeholder="votre@email.com" style="font-family: 'Catamaran', sans-serif; font-weight: 300; font-size: 15px; padding: 11px 14px; border: 1px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.08); color: #ffffff; flex: 1; outline: none; min-width: 0;" />
+        <button type="submit" style="font-family: 'Catamaran', sans-serif; font-weight: 500; font-size: 14px; color: #814448; background: #ffffff; border: none; padding: 11px 18px; cursor: pointer; letter-spacing: 0.02em; white-space: nowrap; transition: all 0.2s;" style-hover="background: #CF9979; color: #ffffff;">S'inscrire</button>
+      </form>
+    </div>
+
+    <!-- Contact -->
+    <div>
+      <h3 style="font-family: 'Bodoni Moda', serif; font-weight: 700; font-size: 21px; color: #ffffff; margin-bottom: 10px;">Contact</h3>
+      <div style="display: flex; flex-direction: column; gap: 6px;">
+        <p style="font-family: 'Catamaran', sans-serif; font-weight: 100; font-size: 16px; color: rgba(255,255,255,0.8); line-height: 1.65;">Rue du Progrès 4 bte 7<br />1400 Nivelles, Belgique</p>
+        <a href="tel:067878656" style="font-family: 'Catamaran', sans-serif; font-weight: 300; font-size: 16px; color: rgba(255,255,255,0.8); text-decoration: none; transition: color 0.2s;" style-hover="color: #ffffff;">Tél : 067 87 86 56</a>
+        <a href="mailto:info@cultureinvivo.be" style="font-family: 'Catamaran', sans-serif; font-weight: 300; font-size: 16px; color: rgba(255,255,255,0.8); text-decoration: none; transition: color 0.2s;" style-hover="color: #ffffff;">info@cultureinvivo.be</a>
+      </div>
+    </div>
+
+    <!-- Réseaux sociaux -->
+    <div>
+      <h3 style="font-family: 'Bodoni Moda', serif; font-weight: 700; font-size: 21px; color: #ffffff; margin-bottom: 10px;">Suivez-nous</h3>
+      <p style="font-family: 'Catamaran', sans-serif; font-weight: 100; font-size: 16px; color: rgba(255,255,255,0.8); line-height: 1.65; margin-bottom: 16px;">Retrouvez nos actualités sur les réseaux sociaux.</p>
+      <div style="display: flex; gap: 10px;">
+        <a href="#" aria-label="Facebook" style="width: 42px; height: 42px; border: 1px solid rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.2s;" style-hover="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.5);">
+          <span style="font-family: sans-serif; font-weight: 600; font-size: 16px; color: #ffffff;">f</span>
+        </a>
+        <a href="#" aria-label="LinkedIn" style="width: 42px; height: 42px; border: 1px solid rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.2s;" style-hover="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.5);">
+          <span style="font-family: sans-serif; font-weight: 600; font-size: 14px; color: #ffffff;">in</span>
+        </a>
+        <a href="#" aria-label="Instagram" style="width: 42px; height: 42px; border: 1px solid rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.2s;" style-hover="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.5);">
+          <svg width="17" height="17" viewBox="0 0 17 17" fill="none">
+            <rect x="1.5" y="1.5" width="14" height="14" rx="4" stroke="white" stroke-width="1.3" fill="none"></rect>
+            <circle cx="8.5" cy="8.5" r="3.5" stroke="white" stroke-width="1.3" fill="none"></circle>
+            <circle cx="13" cy="4" r="1" fill="white"></circle>
+          </svg>
+        </a>
+        <a href="#" aria-label="X" style="width: 42px; height: 42px; border: 1px solid rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.2s;" style-hover="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.5);">
+          <span style="font-family: sans-serif; font-weight: 700; font-size: 14px; color: #ffffff;">X</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width: 1200px; margin: 0 auto; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+    <span style="font-family: 'Catamaran', sans-serif; font-weight: 300; font-size: 13px; color: rgba(255,255,255,0.6);">© 2026 Culture In Vivo ASBL. Tous droits réservés.</span>
+    <div style="display: flex; gap: 20px;">
+      <a href="#" style="font-family: 'Catamaran', sans-serif; font-weight: 300; font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s;" style-hover="color: rgba(255,255,255,0.9);">Mentions légales</a>
+      <a href="#" style="font-family: 'Catamaran', sans-serif; font-weight: 300; font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s;" style-hover="color: rgba(255,255,255,0.9);">Politique de confidentialité</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ════════════════════════════════════════════ CHATBOT ════════════════════════════════════════════ -->
+<div style="position: fixed; bottom: 28px; right: 28px; z-index: 150; display: flex; flex-direction: column; align-items: flex-end; gap: 10px;">
+  <sc-if value="{{ chatOpen }}">
+    <div style="width: 330px; background: #ffffff; box-shadow: 0 12px 44px rgba(0,0,0,0.12); border: 1px solid #eee; display: flex; flex-direction: column; overflow: hidden;">
+      <div style="background: #814448; padding: 18px 20px; display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-family: 'Bodoni Moda', serif; font-weight: 700; font-size: 17px; color: #ffffff;">Besoin d'aide ?</span>
+        <button onClick="{{ toggleChat }}" style="background: none; border: none; color: #ffffff; cursor: pointer; font-size: 18px; padding: 0; line-height: 1; font-family: sans-serif;">✕</button>
+      </div>
+      <div style="padding: 20px;">
+        <p style="font-family: 'Catamaran', sans-serif; font-weight: 300; font-size: 15px; color: #353535; line-height: 1.6;">Bonjour ! Comment pouvons-nous vous aider ? Posez votre question ou décrivez votre besoin.</p>
+      </div>
+      <div style="padding: 0 20px 20px; display: flex; gap: 8px;">
+        <input data-chat-input type="text" placeholder="Votre message..." style="font-family: 'Catamaran', sans-serif; font-weight: 300; font-size: 14px; padding: 10px 12px; border: 1px solid #ddd; flex: 1; outline: none; min-width: 0;" />
+        <button style="font-family: 'Catamaran', sans-serif; font-weight: 500; font-size: 13px; color: #ffffff; background: #814448; border: none; padding: 10px 14px; cursor: pointer; transition: background 0.2s;" style-hover="background: #6a373b;">Envoyer</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <button onClick="{{ toggleChat }}" style="width: 56px; height: 56px; border-radius: 50%; background: #814448; border: none; cursor: pointer; box-shadow: 0 4px 20px rgba(129,68,72,0.3); display: flex; align-items: center; justify-content: center; transition: all 0.25s; flex-shrink: 0;" style-hover="transform: scale(1.06); box-shadow: 0 6px 28px rgba(129,68,72,0.4);">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M4 17 L4 6 C4 4.9 4.9 4 6 4 L18 4 C19.1 4 20 4.9 20 6 L20 14 C20 15.1 19.1 16 18 16 L8 16 L4 20 Z" stroke="white" stroke-width="1.5" fill="none" stroke-linejoin="round"></path>
+      <line x1="8" y1="9" x2="16" y2="9" stroke="white" stroke-width="1.4" stroke-linecap="round"></line>
+      <line x1="8" y1="12" x2="13" y2="12" stroke="white" stroke-width="1.4" stroke-linecap="round"></line>
+    </svg>
+  </button>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+
+class Component extends DCLogic {
+  state = {
+    mobileMenuOpen: false,
+    chatOpen: false,
+    scrolled: false,
+    email: ''
+  };
+
+  componentDidMount() {
+    this._onScroll = () => {
+      const scrolled = window.scrollY > 60;
+      if (scrolled !== this.state.scrolled) {
+        this.setState({ scrolled });
+      }
+    };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+
+    this._fontStyle = document.createElement('style');
+    this._fontStyle.id = 'dc-font-override';
+    document.head.appendChild(this._fontStyle);
+    this._applyFonts();
+  }
+
+  componentDidUpdate() {
+    this._applyFonts();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this._onScroll);
+    if (this._fontStyle && this._fontStyle.parentNode) {
+      this._fontStyle.parentNode.removeChild(this._fontStyle);
+    }
+  }
+
+  _applyFonts() {
+    var headingMap = {
+      'Bodoni Moda': "'Bodoni Moda', serif",
+      'Playfair Display': "'Playfair Display', serif",
+      'Libre Baskerville': "'Libre Baskerville', serif",
+      'DM Serif Display': "'DM Serif Display', serif"
+    };
+    var bodyMap = {
+      'Catamaran': "'Catamaran', sans-serif",
+      'Source Sans 3': "'Source Sans 3', sans-serif",
+      'Lato': "'Lato', sans-serif",
+      'Nunito Sans': "'Nunito Sans', sans-serif"
+    };
+    var hf = headingMap[this.props.headingFont] || headingMap['Bodoni Moda'];
+    var bf = bodyMap[this.props.bodyFont] || bodyMap['Catamaran'];
+    this._fontStyle.textContent =
+      '[style*="Bodoni Moda"] { font-family: ' + hf + ' !important; }\n' +
+      '[style*="Catamaran"] { font-family: ' + bf + ' !important; }';
+  }
+
+  renderVals() {
+    const { scrolled, mobileMenuOpen, chatOpen, email } = this.state;
+    return {
+      scrolled,
+      mobileMenuOpen,
+      chatOpen,
+      email,
+      headerBg: scrolled ? 'rgba(255,255,255,0.97)' : 'rgba(255,255,255,0)',
+      headerShadow: scrolled ? '0 1px 12px rgba(0,0,0,0.06)' : 'none',
+      toggleMenu: () => this.setState(s => ({ mobileMenuOpen: !s.mobileMenuOpen })),
+      closeMenu: () => this.setState({ mobileMenuOpen: false }),
+      toggleChat: () => this.setState(s => ({ chatOpen: !s.chatOpen })),
+      setEmail: (e) => this.setState({ email: e.target.value }),
+      submitNewsletter: (e) => {
+        e.preventDefault();
+        if (this.state.email) {
+          alert('Merci pour votre inscription !');
+          this.setState({ email: '' });
+        }
+      }
+    };
+  }
+}
+
+</script>
+</body>
+</html>

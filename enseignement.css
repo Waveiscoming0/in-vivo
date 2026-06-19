@@ -1,0 +1,257 @@
+/* ════════════════════════════════════════════════════════════
+   ENSEIGNEMENT — Section à onglets (structure type "feature tabs")
+   Reproduit le style du composant shadcn Feature108 en HTML/CSS/JS.
+   ════════════════════════════════════════════════════════════ */
+
+.ens-feature .section-sub { max-width: 560px; margin-left: auto; margin-right: auto; }
+
+/* ---- Conteneur des onglets ---- */
+.tabs { margin-top: 48px; }
+
+/* ---- Rangée de boutons d'onglets ---- */
+.tabs-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+@media (min-width: 640px) {
+  .tabs-list { flex-direction: row; gap: 24px; }
+}
+
+.tab-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  background: transparent;
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.tab-trigger:hover { color: var(--sauge-deep); }
+.tab-trigger svg { flex-shrink: 0; }
+
+.tab-trigger.is-active {
+  background: var(--sauge-bg);
+  border-color: var(--placeholder-border);
+  color: var(--sauge-deep);
+}
+
+/* ---- Zone des panneaux ---- */
+.tabs-panels {
+  margin: 40px auto 0;
+  max-width: 1100px;
+  background: var(--cream-bg);
+  border: 1px solid var(--placeholder-border);
+  border-radius: 20px;
+  padding: 32px;
+}
+@media (min-width: 1024px) {
+  .tabs-panels { padding: 64px; }
+}
+
+.tab-panel { display: none; }
+.tab-panel.is-active { display: block; }
+
+/* ---- Disposition 2 colonnes (texte + média) pour certains onglets ---- */
+.tab-split { display: grid; gap: 48px; align-items: center; }
+@media (min-width: 1024px) {
+  .tab-split { grid-template-columns: 1fr 1fr; gap: 40px; }
+}
+
+/* ---- En-tête d'un onglet : titre centré façon "— … —" ---- */
+.ens-intro { text-align: center; max-width: 720px; margin: 0 auto; }
+.ens-intro-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  font-family: var(--serif);
+  font-size: 38px;
+  line-height: 1.12;
+  color: var(--ink);
+  margin: 0;
+}
+.ens-intro-title::before,
+.ens-intro-title::after {
+  content: "";
+  flex: 0 0 auto;
+  width: 42px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.5;
+}
+@media (min-width: 1024px) { .ens-intro-title { font-size: 46px; } }
+.ens-intro-accent {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--sauge-deep);
+  margin: 16px 0 0;
+}
+.ens-intro-text {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--text);
+  margin: 20px auto 0;
+  max-width: 640px;
+  text-wrap: pretty;
+}
+
+/* ---- Grille des blocs d'ateliers ---- */
+.ateliers-grid {
+  margin-top: 56px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+  align-items: start;
+}
+.atelier-card {
+  background: #fff;
+  border: 1px solid var(--placeholder-border);
+  border-radius: 14px;
+  padding: 26px 24px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.atelier-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(106, 158, 142, 0.16); }
+.atelier-cat {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--ink);
+  margin: 0 0 14px;
+}
+.atelier-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+.atelier-list li {
+  position: relative;
+  padding-left: 18px;
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--text);
+}
+.atelier-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--sauge-deep);
+}
+
+/* ---- Accordéon : en-tête cliquable de chaque atelier ---- */
+.atelier-cat { margin: 0; }
+.atelier-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--ink);
+}
+.atelier-flask {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(106, 158, 142, 0.13);
+  color: var(--sauge-deep);
+}
+.atelier-cat-label { flex: 1 1 auto; }
+.atelier-chevron {
+  flex: 0 0 auto;
+  display: inline-flex;
+  color: rgba(53, 53, 53, 0.32);
+  transition: transform 0.3s ease;
+}
+.atelier-card.is-open .atelier-chevron { transform: rotate(180deg); }
+
+/* ---- Détail repliable (animation de hauteur) ---- */
+.atelier-detail {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.32s ease;
+}
+.atelier-card.is-open .atelier-detail { grid-template-rows: 1fr; }
+.atelier-detail-inner { overflow: hidden; min-height: 0; }
+.atelier-detail .atelier-list { padding-top: 14px; }
+
+/* ---- Ateliers en ligne (titre + description + bouton Détail) ---- */
+.ateliers-rows { margin-top: 48px; display: flex; flex-direction: column; gap: 18px; }
+.atelier-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  background: #fff;
+  border: 1px solid var(--placeholder-border);
+  border-left: 4px solid var(--sauge-deep);
+  border-radius: 14px;
+  padding: 22px 26px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.atelier-row:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(106, 158, 142, 0.16); }
+.atelier-row-title { font-family: var(--sans); font-weight: 700; font-size: 18px; color: var(--ink); margin: 0 0 6px; }
+.atelier-row-desc { font-family: var(--sans); font-weight: 300; font-size: 15px; line-height: 1.6; color: var(--text); margin: 0; max-width: 70ch; }
+.btn-detail {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--sauge-deep);
+  color: #fff;
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 10px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+.btn-detail:hover { background: #5a8a7b; }
+.btn-detail-plus { font-size: 16px; line-height: 1; }
+@media (max-width: 640px) {
+  .atelier-row { flex-direction: column; align-items: flex-start; }
+}
+
+/* ---- Colonne texte (onglets en disposition 2 colonnes) ---- */
+.tab-panel-text { display: flex; flex-direction: column; gap: 18px; }
+.tab-panel-text .eyebrow { width: fit-content; }
+.tab-panel-title {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 34px;
+  line-height: 1.1;
+  color: var(--ink);
+  margin: 0;
+}
+@media (min-width: 1024px) {
+  .tab-panel-title { font-size: 44px; }
+}
+.tab-panel-desc { font-size: 17px; line-height: 1.6; color: var(--text); margin: 0; }
+.tab-panel-text .btn { margin-top: 8px; }
+
+/* ---- Colonne média (illustration en attente) ---- */
+.tab-panel-media { width: 100%; }

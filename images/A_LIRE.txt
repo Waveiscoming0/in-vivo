@@ -1,0 +1,20 @@
+📁 DOSSIER IMAGES — Culture In Vivo
+=====================================
+
+C'est ici que tu déposes les images que tu veux mettre sur le site.
+
+COMMENT FAIRE :
+1. Glisse simplement tes fichiers image dans ce dossier "images".
+2. Préviens-moi (Claude) en me disant par exemple :
+   "j'ai mis une photo d'équipe dans le dossier images, mets-la sur la page Entreprises".
+3. Je m'occupe de l'intégrer au bon endroit dans le site.
+
+CONSEILS :
+- Formats acceptés : .jpg, .png, .webp (le .webp est plus léger = site plus rapide).
+- Évite les espaces et accents dans les noms de fichiers.
+  ✅ bon :   equipe-labo.jpg
+  ❌ éviter : Photo de l'équipe (1).JPG
+- Donne des noms clairs (ex : "salle-blanche.jpg", "formation-groupe.jpg")
+  pour que je retrouve facilement la bonne image.
+
+Tu n'as rien d'autre à faire : dépose, et dis-moi quoi en faire.

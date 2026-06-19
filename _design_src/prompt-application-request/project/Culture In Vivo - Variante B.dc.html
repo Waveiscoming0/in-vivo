@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,500;6..12,600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: #FAFAF7; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    #pour-qui, #installations, #partenaires, #contact { scroll-margin-top: 80px; }
+    @keyframes marquee-scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    @keyframes breathe {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.04); }
+    }
+    [data-newsletter-input]::placeholder { color: rgba(255,255,255,0.4); }
+    [data-chat-input]::placeholder { color: #aaa; }
+    @media (max-width: 960px) {
+      [data-hero-grid] { grid-template-columns: 1fr !important; gap: 48px !important; }
+      [data-audience-grid] { grid-template-columns: 1fr 1fr !important; }
+      [data-history-grid] { grid-template-columns: 1fr !important; gap: 40px !important; }
+      [data-install-grid] { grid-template-columns: 1fr 1fr !important; }
+      [data-footer-cols] { grid-template-columns: 1fr 1fr !important; gap: 40px !important; }
+      [data-nav-links] { display: none !important; }
+      [data-nav-cta] { display: none !important; }
+      [data-mobile-btn] { display: flex !important; }
+    }
+    @media (max-width: 640px) {
+      [data-audience-grid] { grid-template-columns: 1fr !important; }
+      [data-hero-h1] { font-size: 38px !important; }
+      [data-section-h2] { font-size: 30px !important; }
+      [data-footer-cols] { grid-template-columns: 1fr !important; }
+      [data-install-grid] { grid-template-columns: 1fr !important; }
+    }
+  </style>
+</helmet>
+
+<!-- ════════ HEADER ════════ -->
+<header style="position: fixed; top: 0; left: 0; right: 0; z-index: 100; transition: background 0.35s ease, box-shadow 0.35s ease; background: {{ headerBg }}; box-shadow: {{ headerShadow }};">
+  <div style="max-width: 1120px; margin: 0 auto; padding: 16px 32px; display: flex; align-items: center; justify-content: space-between;">
+    <a href="#accueil" style="text-decoration: none; display: flex; align-items: center; gap: 9px;">
+      <img src="./logo.png" alt="Culture In Vivo" style="height: 42px; width: auto; flex-shrink: 0;" />
+    </a>
+    <nav data-nav-links style="display: flex; align-items: center; gap: 28px;">
+      <a href="#accueil" style="font-family: 'Nunito Sans', sans-serif; font-weight: 400; font-size: 15px; color: #5B7F6E; text-decoration: none; transition: color 0.2s;" style-hover="color: #2C3E36;">Accueil</a>
+      <a href="#pour-qui" style="font-family: 'Nunito Sans', sans-serif; font-weight: 400; font-size: 15px; color: #5B7F6E; text-decoration: none; transition: color 0.2s;" style-hover="color: #2C3E36;">Formations</a>
+      <a href="#installations" style="font-family: 'Nunito Sans', sans-serif; font-weight: 400; font-size: 15px; color: #5B7F6E; text-decoration: none; transition: color 0.2s;" style-hover="color: #2C3E36;">Laboratoires</a>
+      <a href="#partenaires" style="font-family: 'Nunito Sans', sans-serif; font-weight: 400; font-size: 15px; color: #5B7F6E; text-decoration: none; transition: color 0.2s;" style-hover="color: #2C3E36;">Partenaires</a>
+      <a href="#contact" style="font-family: 'Nunito Sans', sans-serif; font-weight: 400; font-size: 15px; color: #5B7F6E; text-decoration: none; transition: color 0.2s;" style-hover="color: #2C3E36;">Contact</a>
+    </nav>
+    <a data-nav-cta href="#contact" style="font-family: 'Nunito Sans', sans-serif; font-weight: 500; font-size: 14px; color: #ffffff; background: #5B7F6E; padding: 10px 24px; border-radius: 28px; text-decoration: none; transition: background 0.25s;" style-hover="background: #4a6b5c;">Nous contacter</a>
+    <button data-mobile-btn onClick="{{ toggleMenu }}" style="display: none; background: none; border: none; cursor: pointer; padding: 8px; align-items: center; justify-content: center;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><line x1="3" y1="6" x2="21" y2="6" stroke="#2C3E36" stroke-width="2" stroke-linecap="round"></line><line x1="3" y1="12" x2="21" y2="12" stroke="#2C3E36" stroke-width="2" stroke-linecap="round"></line><line x1="3" y1="18" x2="21" y2="18" stroke="#2C3E36" stroke-width="2" stroke-linecap="round"></line></svg>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile overlay -->
+<sc-if value="{{ mobileMenuOpen }}">
+  <div style="position: fixed; inset: 0; z-index: 200; background: rgba(250,250,247,0.98); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 32px;">
+    <button onClick="{{ toggleMenu }}" style="position: absolute; top: 20px; right: 28px; background: none; border: none; cursor: pointer; font-size: 28px; color: #2C3E36; line-height: 1;">✕</button>
+    <a href="#accueil" onClick="{{ closeMenu }}" style="font-family: 'Instrument Serif', serif; font-size: 26px; color: #2C3E36; text-decoration: none;">Accueil</a>
+    <a href="#pour-qui" onClick="{{ closeMenu }}" style="font-family: 'Instrument Serif', serif; font-size: 26px; color: #2C3E36; text-decoration: none;">Formations</a>
+    <a href="#installations" onClick="{{ closeMenu }}" style="font-family: 'Instrument Serif', serif; font-size: 26px; color: #2C3E36; text-decoration: none;">Laboratoires</a>
+    <a href="#partenaires" onClick="{{ closeMenu }}" style="font-family: 'Instrument Serif', serif; font-size: 26px; color: #2C3E36; text-decoration: none;">Partenaires</a>
+    <a href="#contact" onClick="{{ closeMenu }}" style="font-family: 'Instrument Serif', serif; font-size: 26px; color: #2C3E36; text-decoration: none;">Contact</a>
+  </div>
+</sc-if>
+
+<!-- ════════ HERO ════════ -->
+<section id="accueil" data-screen-label="Hero" style="padding: 140px 32px 80px; background: #FAFAF7;">
+  <div style="max-width: 1120px; margin: 0 auto; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 24px;">
+    <div style="display: inline-flex; align-items: center; gap: 8px; background: #EDF3EF; padding: 7px 18px; border-radius: 20px;">
+      <div style="width: 6px; height: 6px; background: #5B7F6E; border-radius: 50%; animation: breathe 3s ease-in-out infinite;"></div>
+      <span style="font-family: 'Nunito Sans', sans-serif; font-weight: 500; font-size: 13px; color: #5B7F6E; letter-spacing: 0.02em;">Sciences du vivant · Nivelles</span>
+    </div>
+
+    <h1 data-hero-h1 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 56px; line-height: 1.1; color: #2C3E36; letter-spacing: -0.02em; max-width: 700px; text-wrap: balance;">Les sciences du vivant, <em style="color: #5B7F6E; font-style: italic;">par la pratique.</em></h1>
+
+    <p style="font-family: 'Nunito Sans', sans-serif; font-weight: 300; font-size: 18px; line-height: 1.7; color: #6B7F75; max-width: 560px; text-wrap: pretty;">Formations qualifiantes, ateliers scientifiques et laboratoires équipés : Culture In Vivo accompagne étudiants, chercheurs d'emploi, enseignants et professionnels depuis plus de vingt ans.</p>
+
+    <div style="display: flex; gap: 14px; align-items: center; flex-wrap: wrap; justify-content: center; margin-top: 8px;">
+      <a href="#pour-qui" style="font-family: 'Nunito Sans', sans-serif; font-weight: 500; font-size: 15px; color: #ffffff; background: #5B7F6E; padding: 14px 32px; border-radius: 32px; text-decoration: none; transition: background 0.25s;" style-hover="background: #4a6b5c;">Trouver mon parcours</a>
+      <a href="#installations" style="font-family: 'Nunito Sans', sans-serif; font-weight: 500; font-size: 15px; color: #5B7F6E; border: 1.5px solid #C2D5CA; padding: 13px 28px; border-radius: 32px; text-decoration: none; transition: all 0.25s; background: transparent;" style-hover="background: #EDF3EF; border-color: #5B7F6E;">Nos laboratoires</a>
+    </div>
+  </div>
+
+  <!-- Hero visual -->
+  <div style="max-width: 960px; margin: 56px auto 0; position: relative;">
+    <div style="aspect-ratio: 16/7; background: linear-gradient(135deg, #EDF3EF 0%, #E4EDE8 100%); border-radius: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; border: 1px solid #D5E0D9;">
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><rect x="8" y="12" width="32" height="24" rx="3" stroke="#5B7F6E" stroke-width="1.4" fill="none"></rect><circle cx="24" cy="24" r="7" stroke="#5B7F6E" stroke-width="1.4" fill="none"></circle><circle cx="24" cy="24" r="2.5" fill="#5B7F6E"></circle></svg>
+      <span style="font-family: 'Nunito Sans', sans-serif; font-weight: 400; font-size: 13px; color: #5B7F6E; letter-spacing: 0.02em;">Photo panoramique · Laboratoires Culture In Vivo</span>
+    </div>
+    <!-- Floating badges -->
+    <div style="position: absolute; bottom: -18px; left: 32px; background: #ffffff; padding: 16px 22px; border-radius: 14px; box-shadow: 0 6px 24px rgba(44,62,54,0.08); display: flex; align-items: center; gap: 12px;">
+      <div style="width: 40px; height: 40px; background: #EDF3EF; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2 L9 16" stroke="#5B7F6E" stroke-width="1.4" stroke-linecap="round"></path><path d="M2 9 L16 9" stroke="#5B7F6E" stroke-width="1.4" stroke-linecap="round"></path></svg>
+      </div>
+      <div>
+        <span style="font-family: 'Instrument Serif', serif; font-size: 22px; color: #2C3E36; line-height: 1;">20+ ans</span>
+        <span style="font-family: 'Nunito Sans', sans-serif; font-weight: 400; font-size: 12px; color: #6B7F75; display: block;">d'expertise en sciences du vivant</span>
+      </div>
+    </div>
+    <div style="position: absolute; top: -14px; right: 32px; background: #ffffff; padding: 12px 18px; border-radius: 12px; box-shadow: 0 6px 24px rgba(44,62,54,0.08); display: flex; align-items: center; gap: 8px;">
+      <div style="width: 8px; height: 8px; background: #7EC69A; border-radius: 50;"></div>
+      <span style="font-family: 'Nunito Sans', sans-serif; font-weight: 500; font-size: 13px; color: #2C3E36;">Inscriptions ouvertes</span>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ POUR QUI ════════ -->
+<section id="pour-qui" data-screen-label="Pour qui" style="padding: 100px 32px; background: #ffffff;">
+  <div style="max-width: 1120px; margin: 0 auto;">
+    <div style="text-align: center; margin-bottom: 52px;">
+      <div style="display: inline-flex; align-items: center; gap: 8px; background: #EDF3EF; padding: 6px 16px; border-radius: 16px; margin-bottom: 14px;">
+        <span style="font-family: 'Nunito Sans', sans-serif; font-weight: 500; font-size: 12px; color: #5B7F6E; letter-spacing: 0.06em; text-transform: uppercase;">Nos publics</span>
+      </div>
+      <h2 data-section-h2 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 42px; color: #2C3E36; letter-spacing: -0.01em; text-wrap: balance;">À qui s'adressent nos formations ?</h2>
+      <p style="font-family: 'Nunito Sans', sans-serif; font-weight: 300; font-size: 17px; color: #6B7F75; margin-top: 12px; max-width: 480px; margin-left: auto; margin-right: auto; line-height: 1.65;">Quatre publics, un même engagement : rendre les sciences du vivant accessibles et concrètes.</p>
+    </div>
+
+    <div data-audience-grid style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+      <!-- Écoles -->
+      <div style="background: #FAFAF7; padding: 32px 28px; border-radius: 16px; transition: transform 0.3s ease, box-shadow 0.3s ease;" style-hover="transform: translateY(-3px); box-shadow: 0 10px 32px rgba(44,62,54,0.06);">
+        <div style="width: 48px; height: 48px; background: #EDF3EF; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px;">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M2 8 L11 3 L20 8 L11 13 Z" stroke="#5B7F6E" stroke-width="1.3" fill="none"></path><path d="M5 10 L5 15 L11 18 L17 15 L17 10" stroke="#5B7F6E" stroke-width="1.3" fill="none"></path></svg>
+        </div>
+        <h3 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 22px; color: #2C3E36; margin-bottom: 8px;">Écoles</h3>
+        <p style="font-family: 'Nunito Sans', sans-serif; font-weight: 300; font-size: 15px; color: #6B7F75; line-height: 1.65; margin-bottom: 18px;">Animations et ateliers scientifiques pour éveiller la curiosité, du microscope à l'ADN.</p>
+        <a href="#" style="font-family: 'Nunito Sans', sans-serif; font-weight: 500; font-size: 14px; color: #5B7F6E; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; background: #EDF3EF; padding: 8px 16px; border-radius: 20px; transition: all 0.2s;" style-hover="background: #D5E0D9;">Découvrir →</a>
+      </div>
+      <!-- Demandeurs d'emploi -->
+      <div style="background: #FAFAF7; padding: 32px 28px; border-radius: 16px; transition: transform 0.3s ease, box-shadow 0.3s ease;" style-hover="transform: translateY(-3px); box-shadow: 0 10px 32px rgba(44,62,54,0.06);">
+        <div style="width: 48px; height: 48px; background: #FFF3EC; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px;">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><line x1="11" y1="17" x2="11" y2="6" stroke="#C68B5E" stroke-width="1.3" stroke-linecap="round"></line><polyline points="7,10 11,6 15,10" stroke="#C68B5E" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" fill="none"></polyline></svg>
+        </div>
+        <h3 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 22px; color: #2C3E36; margin-bottom: 8px;">Demandeurs d'emploi</h3>
+        <p style="font-family: 'Nunito Sans', sans-serif; font-weight: 300; font-size: 15px; color: #6B7F75; line-height: 1.65; margin-bottom: 18px;">Formations qualifiantes vers les métiers des biotechnologies et de la biopharmacie.</p>
+        <a href="#" style="font-family: 'Nunito Sans', sans-serif; font-weight: 500; font-size: 14px; color: #5B7F6E; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; background: #EDF3EF; padding: 8px 16px; border-radius: 20px; transition: all 0.2s;" style-hover="background: #D5E0D9;">Voir les formations →</a>
+      </div>
+      <!-- Enseignement supérieur -->
+      <div style="background: #FAFAF7; padding: 32px 28px; border-radius: 16px; transition: transform 0.3s ease, box-shadow 0.3s ease;" style-hover="transform: translateY(-3px); box-shadow: 0 10px 32px rgba(44,62,54,0.06);">
+        <div style="width: 48px; height: 48px; background: #EDF0F8; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px;">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 5 L11 19" stroke="#6878A8" stroke-width="1.3" stroke-linecap="round"></path><path d="M11 5 C11 5 8 3.5 3 4.5 L3 18 C8 17 11 19 11 19" stroke="#6878A8" stroke-width="1.3" fill="none"></path><path d="M11 5 C11 5 14 3.5 19 4.5 L19 18 C14 17 11 19 11 19" stroke="#6878A8" stroke-width="1.3" fill="none"></path></svg>
+        </div>
+        <h3 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 22px; color: #2C3E36; margin-bottom: 8px;">Enseignement supérieur</h3>
+        <p style="font-family: 'Nunito Sans', sans-serif; font-weight: 300; font-size: 15px; color: #6B7F75; line-height: 1.65; margin-bottom: 18px;">Travaux pratiques en laboratoire pour les étudiants de Hautes Écoles et promotion sociale.</p>
+        <a href="#" style="font-family: 'Nunito Sans', sans-serif; font-weight: 500; font-size: 14px; color: #5B7F6E; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; background: #EDF3EF; padding: 8px 16px; border-radius: 20px; transition: all 0.2s;" style-hover="background: #D5E0D9;">Explorer →</a>
+      </div>
+      <!-- Entreprises -->
+      <div style="background: #FAFAF7; padding: 32px 28px; border-radius: 16px; transition: transform 0.3s ease, box-shadow 0.3s ease;" style-hover="transform: translateY(-3px); box-shadow: 0 10px 32px rgba(44,62,54,0.06);">
+        <div style="width: 48px; height: 48px; background: #EDF3EF; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px;">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="9" width="16" height="11" rx="1.5" stroke="#5B7F6E" stroke-width="1.3" fill="none"></rect><path d="M7 9 L7 6 C7 4.9 7.9 4 9 4 L13 4 C14.1 4 15 4.9 15 6 L15 9" stroke="#5B7F6E" stroke-width="1.3" fill="none"></path></svg>
+        </div>
+        <h3 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 22px; color: #2C3E36; margin-bottom: 8px;">Entreprises</h3>
+        <p style="font-family: 'Nunito Sans', sans-serif; font-weight: 300; font-size: 15px; color: #6B7F75; line-height: 1.65; margin-bottom: 18px;">Formations GMP, affaires réglementaires et procédés biotech pour vos équipes.</p>
+        <a href="#" style="font-family: 'Nunito Sans', sans-serif; font-weight: 500; font-size: 14px; color: #5B7F6E; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; background: #EDF3EF; padding: 8px 16px; border-radius: 20px; transition: all 0.2s;" style-hover="background: #D5E0D9;">Catalogue →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ HISTORIQUE ════════ -->
+<section data-screen-label="Historique" style="padding: 100px 32px; background: #EDF3EF;">
+  <div data-history-grid style="max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 5fr 7fr; gap: 48px; align-items: center;">
+    <div style="aspect-ratio: 4/5; background: linear-gradient(135deg, #D5E0D9 0%, #C2D5CA 100%); border-radius: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; border: 1px solid #B5CDBF;">
+      <svg width="44" height="44" viewBox="0 0 44 44" fill="none"><rect x="8" y="12" width="28" height="20" rx="3" stroke="#5B7F6E" stroke-width="1.4" fill="none"></rect><circle cx="22" cy="22" r="5.5" stroke="#5B7F6E" stroke-width="1.4" fill="none"></circle><circle cx="22" cy="22" r="2" fill="#5B7F6E"></circle></svg>
+      <span style="font-family: 'Nunito Sans', sans-serif; font-weight: 400; font-size: 12px; color: #5B7F6E; letter-spacing: 0.02em;">Photo · Équipe et laboratoires</span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      <div style="display: inline-flex; align-items: center; gap: 8px; background: #ffffff; padding: 6px 16px; border-radius: 16px; width: fit-content;">
+        <span style="font-family: 'Nunito Sans', sans-serif; font-weight: 500; font-size: 12px; color: #5B7F6E; letter-spacing: 0.06em; text-transform: uppercase;">Notre histoire</span>
+      </div>
+      <h2 data-section-h2 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 38px; color: #2C3E36; line-height: 1.15; text-wrap: balance;">Depuis le début des années 2000, au service du vivant</h2>
+      <p style="font-family: 'Nunito Sans', sans-serif; font-weight: 300; font-size: 16px; color: #5A6E64; line-height: 1.75; text-wrap: pretty;">Fondée sous le nom de Nivelles Laboratoires, l'ASBL Culture In Vivo s'est imposée comme un acteur de référence dans la promotion et l'enseignement des sciences du vivant en Belgique.</p>
+      <p style="font-family: 'Nunito Sans', sans-serif; font-weight: 300; font-size: 16px; color: #5A6E64; line-height: 1.75; text-wrap: pretty;">Biotechnologies, biologie moléculaire, microbiologie, virologie, immunologie : nos formations couvrent l'ensemble du spectre des disciplines liées au vivant.</p>
+      <div style="display: flex; gap: 28px; margin-top: 8px;">
+        <div style="display: flex; flex-direction: column;">
+          <span style="font-family: 'Instrument Serif', serif; font-size: 32px; color: #5B7F6E; line-height: 1;">500+</span>
+          <span style="font-family: 'Nunito Sans', sans-serif; font-weight: 400; font-size: 13px; color: #6B7F75;">diplômés</span>
+        </div>
+        <div style="width: 1px; background: #C2D5CA;"></div>
+        <div style="display: flex; flex-direction: column;">
+          <span style="font-family: 'Instrument Serif', serif; font-size: 32px; color: #5B7F6E; line-height: 1;">3</span>
+          <span style="font-family: 'Nunito Sans', sans-serif; font-weight: 400; font-size: 13px; color: #6B7F75;">laboratoires</span>
+        </div>
+        <div style="width: 1px; background: #C2D5CA;"></div>
+        <div style="display: flex; flex-direction: column;">
+          <span style="font-family: 'Instrument Serif', serif; font-size: 32px; color: #5B7F6E; line-height: 1;">8</span>
+          <span style="font-family: 'Nunito Sans', sans-serif; font-weight: 400; font-size: 13px; color: #6B7F75;">partenaires</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ INSTALLATIONS ════════ -->
+<section id="installations" data-screen-label="Installations" style="padding: 100px 32px; background: #FAFAF7;">
+  <div style="max-width: 1120px; margin: 0 auto;">
+    <div style="text-align: center; margin-bottom: 48px;">
+      <div style="display: inline-flex; align-items: center; gap: 8px; background: #EDF3EF; padding: 6px 16px; border-radius: 16px; margin-bottom: 14px;">
+        <span style="font-family: 'Nunito Sans', sans-serif; font-weight: 500; font-size: 12px; color: #5B7F6E; letter-spacing: 0.06em; text-transform: uppercase;">Nos espaces</span>
+      </div>
+      <h2 data-section-h2 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 42px; color: #2C3E36;">Des installations d'exception</h2>
+      <p style="font-family: 'Nunito Sans', sans-serif; font-weight: 300; font-size: 17px; color: #6B7F75; margin-top: 12px; max-width: 480px; margin-left: auto; margin-right: auto; line-height: 1.65;">Nos propres laboratoires et salles blanches, au service de la formation et de la recherche appliquée.</p>
+    </div>
+
+    <div data-install-grid style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
+      <div style="aspect-ratio: 3/4; background: linear-gradient(135deg, #EDF3EF 0%, #E4EDE8 100%); border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; border: 1px solid #D5E0D9;">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><path d="M15 36 L15 15 L19 7 L21 7 L25 15 L25 36" stroke="#5B7F6E" stroke-width="1.3" fill="none"></path><line x1="11" y1="36" x2="29" y2="36" stroke="#5B7F6E" stroke-width="1.3"></line><circle cx="20" cy="24" r="3" stroke="#5B7F6E" stroke-width="1" fill="none"></circle></svg>
+        <span style="font-family: 'Nunito Sans', sans-serif; font-weight: 400; font-size: 12px; color: #5B7F6E;">Biologie moléculaire</span>
+      </div>
+      <div style="aspect-ratio: 3/4; background: linear-gradient(135deg, #EDF3EF 0%, #E4EDE8 100%); border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; border: 1px solid #D5E0D9;">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect x="6" y="6" width="28" height="28" rx="3" stroke="#5B7F6E" stroke-width="1.3" fill="none"></rect><rect x="13" y="13" width="14" height="14" rx="2" stroke="#5B7F6E" stroke-width="1" stroke-dasharray="3 2" fill="none"></rect></svg>
+        <span style="font-family: 'Nunito Sans', sans-serif; font-weight: 400; font-size: 12px; color: #5B7F6E;">Salle blanche virologie</span>
+      </div>
+      <div style="aspect-ratio: 3/4; background: linear-gradient(135deg, #EDF3EF 0%, #E4EDE8 100%); border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; border: 1px solid #D5E0D9;">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><polygon points="20,4 36,12 36,28 20,36 4,28 4,12" stroke="#5B7F6E" stroke-width="1.3" fill="none"></polygon></svg>
+        <span style="font-family: 'Nunito Sans', sans-serif; font-weight: 400; font-size: 12px; color: #5B7F6E;">Hotte octogonale</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ PARTENAIRES ════════ -->
+<section id="partenaires" data-screen-label="Partenaires" style="padding: 56px 0; background: #ffffff;">
+  <div style="max-width: 1120px; margin: 0 auto; padding: 0 32px; margin-bottom: 32px;">
+    <h2 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 28px; color: #2C3E36; text-align: center;">Ils nous font confiance</h2>
+  </div>
+  <div style="overflow: hidden; width: 100%;">
+    <div data-marquee-track style="display: flex; gap: 16px; align-items: center; width: max-content; animation: marquee-scroll 36s linear infinite;" style-hover="animation-play-state: paused;">
+      <div style="flex-shrink: 0; padding: 12px 28px; background: #EDF3EF; border-radius: 28px;"><span style="font-family: 'Nunito Sans', sans-serif; font-weight: 500; font-size: 14px; color: #5B7F6E;">Forem</span></div>
+      <div style="flex-shrink: 0; padding: 12px 28px; background: #EDF3EF; border-radius: 28px;"><span style="font-family: 'Nunito Sans', sans-serif; font-weight: 500; font-size: 14px; color: #5B7F6E;">ULiège</span></div>
+      <div style="flex-shrink: 0; padding: 12px 28px; background: #EDF3EF; border-radius: 28px;"><span style="font-family: 'Nunito Sans', sans-serif; font-weight: 500; font-size: 14px; color: #5B7F6E;">UNamur</span></div>
+      <div style="flex-shrink: 0; padding: 12px 28px; background: #EDF3EF; border-radius: 28px;"><span style="font-family: 'Nunito Sans', sans-serif; font-weight: 500; font-size: 14px; color: #5B7F6E;">ULB</span></div>
+      <div style="flex-shrink: 0; padding: 12px 28px; background: #EDF3EF; border-radius: 28px;"><span style="font-family: 'Nunito Sans', sans-serif; font-weight: 500; font-size: 14px; color: #5B7F6E;">AFMPS</span></div>
+      <div style="flex-shrink: 0; padding: 12px 28px; background: #EDF3EF; border-radius: 28px;"><span style="font-family: 'Nunito Sans', sans-serif; font-weight: 500; font-size: 14px; color: #5B7F6E;">Aptaskil</span></div>
+      <div style="flex-shrink: 0; padding: 12px 28px; background: #EDF3EF; border-radius: 28px;"><span style="font-family: 'Nunito Sans', sans-serif; font-weight: 500; font-size: 14px; color: #5B7F6E;">FSE</span></div>
+      <div style="flex-shrink: 0; padding: 12px 28px; background: #EDF3EF; border-radius: 28px;"><span style="font-family: 'Nunito Sans', sans-serif; font-weight: 500; font-size: 14px; color: #5B7F6E;">Condorcet</span></div>
+      <!-- Duplicate -->
+      <div style="flex-shrink: 0; padding: 12px 28px; background: #EDF3EF; border-radius: 28px;"><span style="font-family: 'Nunito Sans', sans-serif; font-weight: 500; font-size: 14px; color: #5B7F6E;">Forem</span></div>
+      <div style="flex-shrink: 0; padding: 12px 28px; background: #EDF3EF; border-radius: 28px;"><span style="font-family: 'Nunito Sans', sans-serif; font-weight: 500; font-size: 14px; color: #5B7F6E;">ULiège</span></div>
+      <div style="flex-shrink: 0; padding: 12px 28px; background: #EDF3EF; border-radius: 28px;"><span style="font-family: 'Nunito Sans', sans-serif; font-weight: 500; font-size: 14px; color: #5B7F6E;">UNamur</span></div>
+      <div style="flex-shrink: 0; padding: 12px 28px; background: #EDF3EF; border-radius: 28px;"><span style="font-family: 'Nunito Sans', sans-serif; font-weight: 500; font-size: 14px; color: #5B7F6E;">ULB</span></div>
+      <div style="flex-shrink: 0; padding: 12px 28px; background: #EDF3EF; border-radius: 28px;"><span style="font-family: 'Nunito Sans', sans-serif; font-weight: 500; font-size: 14px; color: #5B7F6E;">AFMPS</span></div>
+      <div style="flex-shrink: 0; padding: 12px 28px; background: #EDF3EF; border-radius: 28px;"><span style="font-family: 'Nunito Sans', sans-serif; font-weight: 500; font-size: 14px; color: #5B7F6E;">Aptaskil</span></div>
+      <div style="flex-shrink: 0; padding: 12px 28px; background: #EDF3EF; border-radius: 28px;"><span style="font-family: 'Nunito Sans', sans-serif; font-weight: 500; font-size: 14px; color: #5B7F6E;">FSE</span></div>
+      <div style="flex-shrink: 0; padding: 12px 28px; background: #EDF3EF; border-radius: 28px;"><span style="font-family: 'Nunito Sans', sans-serif; font-weight: 500; font-size: 14px; color: #5B7F6E;">Condorcet</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ FOOTER ════════ -->
+<footer id="contact" data-screen-label="Footer" style="padding: 72px 32px 0; background: #2C3E36; border-radius: 28px 28px 0 0;">
+  <div data-footer-cols style="max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+    <div>
+      <h3 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 21px; color: #ffffff; margin-bottom: 10px;">Restez informé</h3>
+      <p style="font-family: 'Nunito Sans', sans-serif; font-weight: 300; font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 18px;">Recevez nos actualités et dates de sessions.</p>
+      <form onSubmit="{{ submitNewsletter }}" style="display: flex; gap: 0; border-radius: 28px; overflow: hidden;">
+        <input data-newsletter-input type="email" value="{{ email }}" onChange="{{ setEmail }}" placeholder="votre@email.com" style="font-family: 'Nunito Sans', sans-serif; font-weight: 300; font-size: 14px; padding: 12px 16px; border: none; background: rgba(255,255,255,0.08); color: #ffffff; flex: 1; outline: none; min-width: 0;" />
+        <button type="submit" style="font-family: 'Nunito Sans', sans-serif; font-weight: 500; font-size: 14px; color: #2C3E36; background: #7EC69A; border: none; padding: 12px 20px; cursor: pointer; transition: background 0.2s; white-space: nowrap;" style-hover="background: #6ab586;">S'inscrire</button>
+      </form>
+    </div>
+    <div>
+      <h3 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 21px; color: #ffffff; margin-bottom: 10px;">Contact</h3>
+      <div style="display: flex; flex-direction: column; gap: 6px;">
+        <p style="font-family: 'Nunito Sans', sans-serif; font-weight: 300; font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.65;">Rue du Progrès 4 bte 7<br />1400 Nivelles, Belgique</p>
+        <a href="tel:067878656" style="font-family: 'Nunito Sans', sans-serif; font-weight: 300; font-size: 15px; color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.2s;" style-hover="color: #7EC69A;">Tél : 067 87 86 56</a>
+        <a href="mailto:info@cultureinvivo.be" style="font-family: 'Nunito Sans', sans-serif; font-weight: 300; font-size: 15px; color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.2s;" style-hover="color: #7EC69A;">info@cultureinvivo.be</a>
+      </div>
+    </div>
+    <div>
+      <h3 style="font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 21px; color: #ffffff; margin-bottom: 10px;">Suivez-nous</h3>
+      <div style="display: flex; gap: 10px; margin-top: 16px;">
+        <a href="#" aria-label="Facebook" style="width: 42px; height: 42px; background: rgba(255,255,255,0.06); border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.2s;" style-hover="background: rgba(126,198,154,0.15);"><span style="font-family: sans-serif; font-weight: 600; font-size: 16px; color: rgba(255,255,255,0.6);">f</span></a>
+        <a href="#" aria-label="LinkedIn" style="width: 42px; height: 42px; background: rgba(255,255,255,0.06); border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.2s;" style-hover="background: rgba(126,198,154,0.15);"><span style="font-family: sans-serif; font-weight: 600; font-size: 14px; color: rgba(255,255,255,0.6);">in</span></a>
+        <a href="#" aria-label="Instagram" style="width: 42px; height: 42px; background: rgba(255,255,255,0.06); border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.2s;" style-hover="background: rgba(126,198,154,0.15);"><svg width="17" height="17" viewBox="0 0 17 17" fill="none"><rect x="1.5" y="1.5" width="14" height="14" rx="4" stroke="rgba(255,255,255,0.6)" stroke-width="1.3" fill="none"></rect><circle cx="8.5" cy="8.5" r="3.5" stroke="rgba(255,255,255,0.6)" stroke-width="1.3" fill="none"></circle><circle cx="13" cy="4" r="1" fill="rgba(255,255,255,0.6)"></circle></svg></a>
+      </div>
+    </div>
+  </div>
+  <div style="max-width: 1120px; margin: 0 auto; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+    <span style="font-family: 'Nunito Sans', sans-serif; font-weight: 300; font-size: 12px; color: rgba(255,255,255,0.35);">© 2026 Culture In Vivo ASBL</span>
+    <div style="display: flex; gap: 20px;">
+      <a href="#" style="font-family: 'Nunito Sans', sans-serif; font-weight: 300; font-size: 12px; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s;" style-hover="color: rgba(255,255,255,0.6);">Mentions légales</a>
+      <a href="#" style="font-family: 'Nunito Sans', sans-serif; font-weight: 300; font-size: 12px; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s;" style-hover="color: rgba(255,255,255,0.6);">Confidentialité</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ════════ CHATBOT ════════ -->
+<div style="position: fixed; bottom: 28px; right: 28px; z-index: 150; display: flex; flex-direction: column; align-items: flex-end; gap: 10px;">
+  <sc-if value="{{ chatOpen }}">
+    <div style="width: 330px; background: #ffffff; box-shadow: 0 12px 44px rgba(0,0,0,0.1); border-radius: 20px; display: flex; flex-direction: column; overflow: hidden;">
+      <div style="background: #5B7F6E; padding: 18px 20px; border-radius: 20px 20px 0 0; display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-family: 'Instrument Serif', serif; font-size: 17px; color: #ffffff;">Besoin d'aide ?</span>
+        <button onClick="{{ toggleChat }}" style="background: none; border: none; color: #ffffff; cursor: pointer; font-size: 18px; padding: 0; line-height: 1;">✕</button>
+      </div>
+      <div style="padding: 20px;">
+        <p style="font-family: 'Nunito Sans', sans-serif; font-weight: 300; font-size: 15px; color: #6B7F75; line-height: 1.6;">Bonjour ! Comment pouvons-nous vous aider ?</p>
+      </div>
+      <div style="padding: 0 20px 20px; display: flex; gap: 8px;">
+        <input data-chat-input type="text" placeholder="Votre message..." style="font-family: 'Nunito Sans', sans-serif; font-weight: 300; font-size: 14px; padding: 10px 14px; border: 1px solid #D5E0D9; border-radius: 20px; flex: 1; outline: none; min-width: 0;" />
+        <button style="font-family: 'Nunito Sans', sans-serif; font-weight: 500; font-size: 13px; color: #ffffff; background: #5B7F6E; border: none; padding: 10px 16px; border-radius: 20px; cursor: pointer; transition: background 0.2s;" style-hover="background: #4a6b5c;">Envoyer</button>
+      </div>
+    </div>
+  </sc-if>
+  <button onClick="{{ toggleChat }}" style="width: 56px; height: 56px; border-radius: 50%; background: #5B7F6E; border: none; cursor: pointer; box-shadow: 0 4px 20px rgba(91,127,110,0.25); display: flex; align-items: center; justify-content: center; transition: all 0.25s;" style-hover="transform: scale(1.06); box-shadow: 0 6px 28px rgba(91,127,110,0.35);">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 17 L4 6 C4 4.9 4.9 4 6 4 L18 4 C19.1 4 20 4.9 20 6 L20 14 C20 15.1 19.1 16 18 16 L8 16 L4 20 Z" stroke="white" stroke-width="1.5" fill="none" stroke-linejoin="round"></path><line x1="8" y1="9" x2="16" y2="9" stroke="white" stroke-width="1.4" stroke-linecap="round"></line><line x1="8" y1="12" x2="13" y2="12" stroke="white" stroke-width="1.4" stroke-linecap="round"></line></svg>
+  </button>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+
+class Component extends DCLogic {
+  state = {
+    mobileMenuOpen: false,
+    chatOpen: false,
+    scrolled: false,
+    email: ''
+  };
+
+  componentDidMount() {
+    this._onScroll = () => {
+      const scrolled = window.scrollY > 60;
+      if (scrolled !== this.state.scrolled) {
+        this.setState({ scrolled });
+      }
+    };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this._onScroll);
+  }
+
+  renderVals() {
+    const { scrolled, mobileMenuOpen, chatOpen, email } = this.state;
+    return {
+      scrolled,
+      mobileMenuOpen,
+      chatOpen,
+      email,
+      headerBg: scrolled ? 'rgba(250,250,247,0.97)' : 'rgba(250,250,247,0)',
+      headerShadow: scrolled ? '0 1px 12px rgba(44,62,54,0.06)' : 'none',
+      toggleMenu: () => this.setState(s => ({ mobileMenuOpen: !s.mobileMenuOpen })),
+      closeMenu: () => this.setState({ mobileMenuOpen: false }),
+      toggleChat: () => this.setState(s => ({ chatOpen: !s.chatOpen })),
+      setEmail: (e) => this.setState({ email: e.target.value }),
+      submitNewsletter: (e) => {
+        e.preventDefault();
+        if (this.state.email) {
+          alert('Merci pour votre inscription !');
+          this.setState({ email: '' });
+        }
+      }
+    };
+  }
+}
+
+</script>
+</body>
+</html>

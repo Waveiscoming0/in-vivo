@@ -1,0 +1,233 @@
+/* ════════════════════════════════════════════════════════════
+   AGENDA — Timeline éditoriale des sessions de formation
+   Charte Culture In Vivo : bordeaux / terracotta / sauge.
+   ════════════════════════════════════════════════════════════ */
+
+.page-agenda { background: #ffffff; }
+
+/* ─────────────── Bandeau d'en-tête ─────────────── */
+.agenda-hero {
+  position: relative;
+  text-align: center;
+  padding: 130px 32px 70px;
+  overflow: hidden;
+}
+.agenda-hero > * { position: relative; }
+
+.agenda-eyebrow {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+}
+.agenda-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  font-family: var(--serif);
+  font-size: 52px;
+  line-height: 1.05;
+  color: var(--bordeaux);
+  margin: 18px 0 0;
+}
+.agenda-title::before,
+.agenda-title::after {
+  content: "";
+  flex: 0 0 auto;
+  width: 54px;
+  height: 1px;
+  background: var(--terracotta);
+}
+@media (min-width: 768px) { .agenda-title { font-size: 68px; } }
+
+.agenda-sub {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 19px;
+  color: var(--text);
+  margin: 16px auto 0;
+  max-width: 520px;
+}
+.agenda-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 28px;
+  padding: 9px 18px;
+  border: 1px solid var(--placeholder-border);
+  border-radius: 999px;
+  background: #fff;
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--bordeaux);
+}
+.agenda-count .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--terracotta);
+  box-shadow: 0 0 0 4px rgba(207, 153, 121, 0.22);
+}
+
+/* ─────────────── Timeline ─────────────── */
+.timeline {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 10px 32px 130px;
+}
+
+.tl-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 92px 1fr;
+  column-gap: 48px;
+  padding-bottom: 44px;
+}
+.tl-item:last-child { padding-bottom: 0; }
+
+/* Colonne vertébrale */
+.tl-item::before {
+  content: "";
+  position: absolute;
+  left: 115px;
+  top: 18px;
+  bottom: -8px;
+  width: 2px;
+  background: rgba(207, 153, 121, 0.5);
+}
+.tl-item:last-child::before {
+  bottom: auto;
+  height: 22px;
+  background: linear-gradient(rgba(207, 153, 121, 0.5), transparent);
+}
+
+/* Nœud sur la ligne */
+.tl-node {
+  position: absolute;
+  left: 106px;
+  top: 14px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid var(--terracotta);
+  display: grid;
+  place-items: center;
+  z-index: 1;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+.tl-node::after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--terracotta);
+  transition: background 0.3s ease;
+}
+
+/* Date à gauche */
+.tl-date { text-align: right; padding-top: 2px; }
+.tl-day { font-family: var(--sans); font-weight: 700; font-size: 40px; line-height: 1; color: #2a2a2a; }
+.tl-month {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin-top: 6px;
+}
+.tl-year { font-family: var(--sans); font-weight: 300; font-size: 12.5px; color: var(--text); opacity: 0.55; margin-top: 2px; }
+
+/* Carte de session */
+.tl-card {
+  position: relative;
+  background: #fff;
+  border: 1px solid var(--placeholder-border);
+  border-radius: 18px;
+  padding: 26px 30px 24px;
+  box-shadow: 0 10px 30px rgba(129, 68, 72, 0.05);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.tl-item:hover .tl-card { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(129, 68, 72, 0.13); }
+.tl-item:hover .tl-node { transform: scale(1.15); border-color: var(--bordeaux); }
+.tl-item:hover .tl-node::after { background: var(--bordeaux); }
+
+.tl-cat {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 11.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+}
+.tl-title {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.18;
+  color: #2a2a2a;
+  margin: 8px 0 16px;
+}
+.tl-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.tl-range {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 15px;
+  color: var(--text);
+}
+.tl-range svg { color: var(--terracotta); flex: 0 0 auto; }
+.tl-duration {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--bordeaux);
+  background: #fff;
+  border: 1px solid var(--placeholder-border);
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+
+.tl-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 20px;
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bordeaux);
+  text-decoration: none;
+  transition: gap 0.25s ease, color 0.25s ease;
+}
+.tl-link span { transition: transform 0.25s ease; }
+.tl-link:hover { color: var(--bordeaux-dark); gap: 11px; }
+.tl-link:hover span { transform: translateX(2px); }
+
+/* ─────────────── Responsive ─────────────── */
+@media (max-width: 640px) {
+  .agenda-hero { padding-top: 110px; }
+  .agenda-title { font-size: 40px; gap: 14px; }
+  .agenda-title::before, .agenda-title::after { width: 26px; }
+  .timeline { padding-left: 18px; padding-right: 18px; }
+  .tl-item { grid-template-columns: 1fr; column-gap: 0; row-gap: 14px; padding-left: 26px; padding-bottom: 36px; }
+  .tl-item::before { left: 5px; top: 8px; }
+  .tl-item:last-child::before { height: 100%; }
+  .tl-node { left: -4px; top: 4px; }
+  .tl-date { text-align: left; display: flex; align-items: baseline; gap: 10px; padding-left: 4px; }
+  .tl-day { font-size: 28px; }
+  .tl-month { margin-top: 0; }
+  .tl-year { margin-top: 0; }
+}
